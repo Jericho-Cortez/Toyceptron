@@ -1,12 +1,10 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+# Sprint Toyceptron - JOUR 2 - Étape 2.2 : Coder layer.py
 
-# 🚀 Sprint Toyceptron - JOUR 2 - Étape 2.2 : Coder layer.py
-
-## 📐 Concept théorique : Qu'est-ce qu'une Layer ?
+## Concept théorique : Qu'est-ce qu'une Layer ?
 
 ### Définition simple
 
-Une **Layer (couche)** = **collection de neurones** qui travaillent **en parallèle**.[^1]
+Une **Layer (couche)** = **collection de neurones** qui travaillent **en parallèle**.
 
 **Règle d'or :**
 
@@ -29,18 +27,16 @@ Inputs: [x1, x2, x3]
 
 ### Lien avec TensorFlow Playground
 
-Sur [playground.tensorflow.org](https://playground.tensorflow.org)  :[^1]
+Sur [playground.tensorflow.org](https://playground.tensorflow.org)  :
 
 - **1 colonne de cercles** = 1 Layer
 - **Chaque cercle** = 1 Neuron
 - **Lignes qui arrivent** = inputs (identiques pour toute la colonne)
 - **Couleur/épaisseur des lignes** = valeur des poids (aléatoires au départ)
 
-**C'est exactement ce qu'on code maintenant !**
-
 ***
 
-## 📝 Code complet commenté de `layer.py`
+## Code complet commenté de `layer.py`
 
 ```python
 # layer.py
@@ -174,7 +170,7 @@ if __name__ == "__main__":
 
 ***
 
-## 🔍 Explications détaillées ligne par ligne
+##  Explications détaillées ligne par ligne
 
 ### **PARTIE 1 : Imports**
 
@@ -185,7 +181,7 @@ from neuron import Neuron
 
 **Pourquoi `random` ?**
 
-- Module **natif Python** (pas numpy !)[^1]
+- Module **natif Python** (pas numpy !)
 - Génère des nombres aléatoires pour initialiser les poids
 - `random.uniform(-1, 1)` → nombre aléatoire entre -1 et 1
 
@@ -242,7 +238,7 @@ weights = [random.uniform(-1, 1) for _ in range(3)]
 
 **Pourquoi entre -1 et 1 ?**
 
-- Bonne pratique en deep learning[^1]
+- Bonne pratique en deep learning
 - Évite les valeurs trop grandes (explosion de gradient)
 - Évite les valeurs trop petites (vanishing gradient)
 
@@ -259,7 +255,7 @@ neuron = Neuron(
 **Points importants :**
 
 - **`weights=weights`** : On passe les poids générés (pas `None`)
-- **Tous les neurones ont le même `num_inputs`** (cohérence dimensionnelle)[^1]
+- **Tous les neurones ont le même `num_inputs`** (cohérence dimensionnelle)
 - **Tous les neurones ont la même `activation`** (simplifie l'architecture)
 - **Mais chaque neurone a des poids DIFFÉRENTS** (générés aléatoirement)
 
@@ -300,7 +296,7 @@ for neuron in self.neurons:
 output = neuron.forward(inputs)
 ```
 
-**Point crucial** : **Tous les neurones reçoivent les mêmes `inputs` !**[^1]
+**Point crucial** : **Tous les neurones reçoivent les mêmes `inputs` !**
 
 **Exemple détaillé :**
 
@@ -338,11 +334,11 @@ return outputs
 ```
 
 - Retourne la **liste complète** des sorties
-- **Neuron retourne 1 scalaire, Layer retourne 1 liste !**[^1]
+- **Neuron retourne 1 scalaire, Layer retourne 1 liste !**
 
 ***
 
-## 📊 Exemple concret avec calculs complets
+##  Exemple concret avec calculs complets
 
 ### Configuration
 
@@ -387,7 +383,7 @@ result = layer.forward([1.0, 2.0])
 
 ***
 
-## 🧪 Analyse des tests unitaires
+##  Analyse des tests unitaires
 
 ### **TEST 1 : Identity (pas de modification)**
 
@@ -407,7 +403,7 @@ Sorties: [-1.358, 1.691, -2.527]
 Type: <class 'list'> | Longueur: 3
 ```
 
-**✅ Vérifications :**
+** Vérifications :**
 
 - 3 neurones créés
 - Poids aléatoires différents
@@ -426,11 +422,11 @@ result_relu = layer_relu.forward([1.0, -2.0, 3.0])
 **Comportement ReLU :**
 
 ```
-Neuron 1 : z = ... → 2.351 → relu(2.351) = 2.351 ✅
-Neuron 2 : z = ... → -0.456 → relu(-0.456) = 0.0 ✅
+Neuron 1 : z = ... → 2.351 → relu(2.351) = 2.351 
+Neuron 2 : z = ... → -0.456 → relu(-0.456) = 0.0 
 ```
 
-**ReLU = `max(0, x)`** → garde les positifs, met les négatifs à 0[^1]
+**ReLU = `max(0, x)`** → garde les positifs, met les négatifs à 0
 
 ***
 
@@ -447,13 +443,13 @@ result_sigmoid = layer_sigmoid.forward([0.5, -0.5])
 Toutes les sorties entre 0 et 1 : [0.444, 0.421, 0.551, 0.635]
 ```
 
-**Sigmoid = $\frac{1}{1 + e^{-x}}$** → sortie toujours entre 0 et 1[^1]
+**Sigmoid = $\frac{1}{1 + e^{-x}}$** → sortie toujours entre 0 et 1
 
 ***
 
-## 🎯 Points clés à retenir
+##  Points clés à retenir
 
-### 1️⃣ **Architecture**
+###  **Architecture**
 
 ```
 Layer = collection de Neuron
@@ -463,18 +459,18 @@ Layer = collection de Neuron
 ```
 
 
-### 2️⃣ **Génération de poids (Python pur)**
+###  **Génération de poids (Python pur)**
 
 ```python
 weights = [random.uniform(-1, 1) for _ in range(num_inputs)]
 ```
 
-- ✅ Pas de numpy
-- ✅ Valeurs entre -1 et 1
-- ✅ Différentes à chaque exécution
+-  Pas de numpy
+-  Valeurs entre -1 et 1
+-  Différentes à chaque exécution
 
 
-### 3️⃣ **Forward pass**
+###  **Forward pass**
 
 ```
 Même inputs → Tous les neurones
@@ -484,14 +480,14 @@ N neurones → liste de N scalaires
 ```
 
 
-### 4️⃣ **Séparation des responsabilités**
+###  **Séparation des responsabilités**
 
 - **Neuron** : calcule produit scalaire + biais + activation
 - **Layer** : gère la collection, génère les poids, orchestre le forward
 
 ***
 
-## ✅ Checklist Étape 2.2
+##  Checklist Étape 2.2
 
 - [x] Fichier `layer.py` créé
 - [x] Classe `Layer` avec `__init__` et `forward`
@@ -504,7 +500,7 @@ N neurones → liste de N scalaires
 
 ***
 
-## 🚀 Validation finale
+##  Validation finale
 
 **Lance :**
 
@@ -515,7 +511,7 @@ python layer.py
 **Résultat attendu :**
 
 ```
-✅ Tous les tests layer.py sont OK !
+ Tous les tests layer.py sont OK !
 ```
 
 **Lance une 2ème fois :**
@@ -530,30 +526,11 @@ python layer.py
 
 ## 🎓 Ce que tu as appris
 
-| Concept | Avant | Maintenant |
-| :-- | :-- | :-- |
-| Layer | ❓ Inconnu | ✅ Collection de neurones parallèles |
-| Poids aléatoires | ❓ | ✅ `random.uniform(-1, 1)` |
-| Forward d'une couche | ❓ | ✅ Même inputs, sorties différentes |
-| Architecture modulaire | ❓ | ✅ Layer compose des Neuron |
+| Concept                | Maintenant                        |
+| :--------------------- | :-------------------------------- |
+| Layer                  | Collection de neurones parallèles |
+| Poids aléatoires       | `random.uniform(-1, 1)`           |
+| Forward d'une couche   | Même inputs, sorties différentes  |
+| Architecture modulaire |  Layer compose des Neuron         |
 
-
-***
-
-## 🔥 Prochaine étape
-
-Selon la roadmap  :[^1]
-
-**JOUR 2 terminé (étapes 2.1 à 2.4) !**
-
-**JOUR 3 : Network (réseau multi-couches)**
-
-- Étape 3.1 : Comprendre l'enchaînement de layers
-- Étape 3.2 : Coder `network.py`
-
-**Dis-moi : "Go JOUR 3" ou "Go étape 3.1" !** 🚀
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
 

@@ -1,14 +1,10 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+##  Objectif de cette étape
 
-# 🚀 Étape 3.3 : Intégration avec le main.py - Guide Complet
-
-## 🎯 Objectif de cette étape
-
-Faire fonctionner le `main.py` fourni par ton prof avec ton code (`neuron.py`, `layer.py`, `network.py`) sans erreur, et comprendre **chaque partie** de l'intégration.[^1]
+Faire fonctionner le `main.py` fourni par ton prof avec ton code (`neuron.py`, `layer.py`, `network.py`) sans erreur, et comprendre **chaque partie** de l'intégration.
 
 ***
 
-## 📋 Plan d'action
+##  Plan d'action
 
 1. **Analyser le main.py** : comprendre ce qu'il attend
 2. **Adapter ton code** : respecter l'API exacte
@@ -17,9 +13,9 @@ Faire fonctionner le `main.py` fourni par ton prof avec ton code (`neuron.py`, `
 
 ***
 
-## 🔍 PARTIE 1 : Analyse du main.py
+##  PARTIE 1 : Analyse du main.py
 
-### **Ce que fait le main.py**[^2]
+### **Ce que fait le main.py**
 
 Le fichier test **3 niveaux** d'abstraction :
 
@@ -39,13 +35,13 @@ from neuron import Neuron
 from activations import act_relu, act_threshold, act_identity
 ```
 
-⚠️ **Attention** : Le main.py importe depuis `activations` (avec un 's'), vérifie le nom de ton fichier !
+ **Attention** : Le main.py importe depuis `activations` (avec un 's'), vérifie le nom de ton fichier !
 
 ***
 
-## 🧱 PARTIE 2 : Implémentation complète
+##  PARTIE 2 : Implémentation complète
 
-### **📄 1. `neuron.py` - Le composant de base**
+### ** 1. `neuron.py` - Le composant de base**
 
 ```python
 class Neuron:
@@ -123,19 +119,19 @@ if __name__ == "__main__":
     print(f"Biais: {n1.bias}")
     print(f"Résultat: {result}")
     print(f"Attendu: 1.6")
-    print(f"✅ Test OK" if abs(result - 1.6) < 0.0001 else "❌ Erreur")
+    print(f" Test OK" if abs(result - 1.6) < 0.0001 else " Erreur")
 ```
 
 
-#### **💡 Pourquoi ce design ?**
+#### ** Pourquoi ce design ?**
 
-- **Pas d'activation dans le neurone** : Cela permet de réutiliser le même neurone avec différentes activations[^2]
+- **Pas d'activation dans le neurone** : Cela permet de réutiliser le même neurone avec différentes activations
 - **Retourne un scalaire** : Un neurone produit une seule valeur, pas une liste
 - **Produit scalaire manuel** : On fait `z = Σ(w·x)` sans bibliothèque externe
 
 ***
 
-### **📄 2. `layer.py` - Collection de neurones**
+### ** 2. `layer.py` - Collection de neurones**
 
 ```python
 from neuron import Neuron
@@ -237,11 +233,11 @@ if __name__ == "__main__":
     print(f"Nombre de neurones: {len(layer.neurons)}")
     print(f"Résultat: {result}")
     print(f"Attendu: [1.6, 0.7]")
-    print(f"✅ Test OK" if result == [1.6, 0.7] else "❌ Erreur")
+    print(f" Test OK" if result == [1.6, 0.7] else " Erreur")
 ```
 
 
-#### **💡 Points clés**
+#### ** Points clés**
 
 - **Tous les neurones reçoivent les mêmes inputs** : C'est le principe d'une couche fully-connected
 - **Retourne une liste** : Autant de valeurs que de neurones
@@ -249,7 +245,7 @@ if __name__ == "__main__":
 
 ***
 
-### **📄 3. `network.py` - Orchestration complète**
+### ** 3. `network.py` - Orchestration complète**
 
 ```python
 from layer import Layer
@@ -389,11 +385,11 @@ if __name__ == "__main__":
     print(f"Nombre de couches: {len(net.layers)}")
     print(f"Résultat: {result}")
     print(f"Attendu: [0.832..., 0.668...]")
-    print(f"✅ Test OK" if 0.83 < result[^0] < 0.84 else "❌ Erreur")
+    print(f" Test OK" if 0.83 < result[^0] < 0.84 else " Erreur")
 ```
 
 
-#### **💡 Logique de feedforward**
+#### ** Logique de feedforward**
 
 ```python
 # Visualisation du flux
@@ -415,7 +411,7 @@ Activation      → [0.530, 0.494]                (activé - OUTPUT FINAL)
 
 ***
 
-### **📄 4. `activations.py` - Fonctions d'activation**
+### ** 4. `activations.py` - Fonctions d'activation**
 
 ```python
 def act_identity(x):
@@ -463,7 +459,7 @@ def act_relu(x):
 
 ***
 
-## 🧪 PARTIE 3 : Tests et validation
+##  PARTIE 3 : Tests et validation
 
 ### **Test 1 : Neurone individuel**
 
@@ -479,7 +475,7 @@ out_n1 = n1.forward([1.0, 2.0, 4.0])
 ```
 z = 0.2×1.0 + (−0.1)×2.0 + 0.4×4.0 + 0.0
 z = 0.2 − 0.2 + 1.6 + 0.0
-z = 1.6 ✅
+z = 1.6 
 ```
 
 
@@ -499,8 +495,8 @@ raw = layer.forward([1.0, 2.0, 4.0])
 **Calcul manuel** :
 
 ```
-Neurone 1: 0.2×1.0 − 0.1×2.0 + 0.4×4.0 + 0.0 = 1.6 ✅
-Neurone 2: −0.4×1.0 + 0.3×2.0 + 0.1×4.0 + 0.1 = 0.7 ✅
+Neurone 1: 0.2×1.0 − 0.1×2.0 + 0.4×4.0 + 0.0 = 1.6 
+Neurone 2: −0.4×1.0 + 0.3×2.0 + 0.1×4.0 + 0.1 = 0.7 
 ```
 
 
@@ -518,45 +514,45 @@ y = net.feedforward([1.0, 2.0, 4.0])
 # Résultat attendu: [0.5309442148001715, 0.494901997674804]
 ```
 
-**Tu as obtenu exactement ça** ✅
+**Tu as obtenu exactement ça** 
 
 ***
 
-## 🎯 PARTIE 4 : Checklist finale
+## PARTIE 4 : Checklist finale
 
-| Critère | Statut | Détail |
-| :-- | :-- | :-- |
-| **Neuron.forward()** | ✅ | Retourne un scalaire brut |
-| **Layer.forward()** | ✅ | Retourne une liste de scalaires bruts |
-| **Network.add()** | ✅ | Ajoute dynamiquement des couches |
-| **Network.feedforward()** | ✅ | Applique activation après chaque couche |
-| **Network.layers** | ✅ | Attribut accessible (liste des couches) |
-| **Compatibilité main.py** | ✅ | Toutes les sorties correspondent |
+| Critère                   | Statut | Détail                                  |
+| :------------------------ | :----- | :-------------------------------------- |
+| **Neuron.forward()**      | OK     | Retourne un scalaire brut               |
+| **Layer.forward()**       | OK     | Retourne une liste de scalaires bruts   |
+| **Network.add()**         | OK     | Ajoute dynamiquement des couches        |
+| **Network.feedforward()** | OK     | Applique activation après chaque couche |
+| **Network.layers**        | OK     | Attribut accessible (liste des couches) |
+| **Compatibilité main.py** | OK     | Toutes les sorties correspondent        |
 
 
 ***
 
-## 🏆 Résultat final obtenu
+##  Résultat final obtenu
 
 ```
 Input: [1.0, 2.0, 4.0]
 
 --- Test Neuron ---
-Neurone h1 (brut): 1.6                         ✅
-Neurone h2 (brut): 0.7                         ✅
+Neurone h1 (brut): 1.6                         
+Neurone h2 (brut): 0.7                         
 
 --- Test Layer ---
-Couche (valeurs brutes): [1.6, 0.7]            ✅
+Couche (valeurs brutes): [1.6, 0.7]            
 
 --- Test Network ---
-Sorties activées : [0.5309..., 0.4949...]      ✅
+Sorties activées : [0.5309..., 0.4949...]      
 ```
 
-**🎉 TU AS RÉUSSI L'INTÉGRATION COMPLÈTE !**
+**TU AS RÉUSSI L'INTÉGRATION COMPLÈTE !**
 
 ***
 
-## 💡 Points clés à retenir
+##  Points clés à retenir
 
 ### **1. Séparation des responsabilités**
 
@@ -580,22 +576,4 @@ Network (enchaînement de Layer + activation)
 - Produit scalaire manuel avec `zip()`
 - List comprehensions pour l'activation
 - Boucles for pour l'enchaînement
-
-***
-
-## 🚀 Prochaine étape
-
-Tu es maintenant prêt pour l'**Étape 3.4 : Vérifications et ajustements**  où tu vas :[^1]
-
-- Nettoyer ton code
-- Ajouter des tests supplémentaires
-- Implémenter des exemples classiques (AND, OR, XOR)
-
-**Bravo, ton Toyceptron est opérationnel ! 🔥**
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
-
-[^2]: main.py
 

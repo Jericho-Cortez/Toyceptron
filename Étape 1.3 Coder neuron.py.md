@@ -1,23 +1,19 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+## Étape 1.3 : Coder `neuron.py`
 
-## 🚀 Étape 1.3 : Coder `neuron.py` — C'EST PARTI !
+## Rappel théorique ultra-rapide
 
-Parfait, on attaque le cœur du projet ! Je vais t'aider à créer ton premier neurone artificiel en Python pur.[^1_1]
-
-## 🧠 Rappel théorique ultra-rapide
-
-Un neurone fait **3 choses** dans l'ordre  :[^1_1]
+Un neurone fait **3 choses** dans l'ordre  :
 
 1. **Produit scalaire** : $z = w_1 \cdot x_1 + w_2 \cdot x_2 + ... + w_n \cdot x_n$
 2. **Ajout du biais** : $z = z + b$
 3. **Activation** : $\text{sortie} = f(z)$
 
-**Exemple concret** : Si inputs = `[1, 2]`, poids = `[0.5, -0.3]`, biais = `0.1`[^1_1]
+**Exemple concret** : Si inputs = `[1, 2]`, poids = `[0.5, -0.3]`, biais = `0.1`
 
 - Calcul : $1 \times 0.5 + 2 \times (-0.3) + 0.1 = 0.5 - 0.6 + 0.1 = 0.0$
 
 
-## 📝 CODE COMPLET DE `neuron.py`
+## CODE COMPLET DE `neuron.py`
 
 ```python
 class Neuron:
@@ -73,7 +69,7 @@ if __name__ == "__main__":
 ```
 
 
-## ✅ EXPLICATION LIGNE PAR LIGNE
+## EXPLICATION LIGNE PAR LIGNE
 
 ### Le constructeur `__init__`
 
@@ -82,7 +78,7 @@ self.weights = weights  # Stocke la liste des poids
 self.bias = bias        # Stocke le biais (un seul nombre)
 ```
 
-Ces deux attributs sont la "mémoire" du neurone.[^1_1]
+Ces deux attributs sont la "mémoire" du neurone.
 
 ### La méthode `forward`
 
@@ -92,7 +88,7 @@ for i in range(len(inputs)):
     z += inputs[i] * self.weights[i]  # Multiplie chaque entrée par son poids
 ```
 
-Cette boucle fait le **produit scalaire** : $x_1 \times w_1 + x_2 \times w_2 + ...$[^1_1]
+Cette boucle fait le **produit scalaire** : $x_1 \times w_1 + x_2 \times w_2 + ...$
 
 ```python
 z += self.bias  # Ajoute le biais au résultat
@@ -100,7 +96,7 @@ return z        # Retourne la valeur finale
 ```
 
 
-## 🧪 VALIDATION — Lance le test !
+## VALIDATION — Lance le test !
 
 Ouvre un terminal et exécute  :[^1_1]
 
@@ -115,20 +111,5 @@ Résultat: 0.0
 Résultat 2: 5.0
 ```
 
-Si ça marche : **BRAVO, ton neurone fonctionne !** 🎉
-
-## 🎯 PROCHAINE ÉTAPE (Étape 1.4)
-
-Maintenant qu'on a le calcul de base, on va ajouter les **fonctions d'activation** pour rendre le neurone "intelligent"  :[^1_1]
-
-- `identity` (identité)
-- `heaviside` (seuil)
-- `sigmoid` (sigmoïde)
-- `relu` (ReLU)
-
-**Tu veux qu'on attaque directement l'Étape 1.4, ou tu veux d'abord tester ton `neuron.py` et me dire si ça marche ?** 💪
-
-<div align="center">⁂</div>
-
-[^1_1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
+Si ça marche : **BRAVO, ton neurone fonctionne !** 
 

@@ -1,6 +1,5 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
-# \# ===== ACTIVATIONS =====
+## ACTIVATIONS 
 
 def identity(x):
 return x
@@ -15,9 +14,10 @@ return 1 / (1 + e ** (-x))
 def relu(x):
 return max(0, x)
 
-# ===== CLASSE NEURON =====
+## CLASSE NEURON
 
-class Neuron:
+```python
+lass Neuron:
 """
 Un neurone artificiel qui calcule :
 sortie = activation(somme_ponderee + biais)
@@ -40,8 +40,10 @@ sortie = activation(somme_ponderee + biais)
         # Étape 3 : Appliquer l'activation
         return self.activation(z)
     
-# ===== TESTS =====
+```
+## TESTS
 
+```python
 if __name__ == "__main__":
 \# Test 1 : avec sigmoid
 n_sigmoid = Neuron(weights=[0.5, -0.3], bias=0.1, activation=sigmoid)
@@ -56,17 +58,10 @@ print(f"Sigmoid: {n_sigmoid.forward([1, 2])}")  \# Attendu : ~0.5
     print(f"Heaviside (0,0): {n_heaviside.forward([0, 0])}")  # Attendu : 0
     print(f"Heaviside (1,1): {n_heaviside.forward([1, 1])}")  # Attendu : 1
     utilise ce code pour m'expliquer la
-Sprint Toyceptron - JOUR 1 démarré
-Étape 1.4 : Ajouter les activations
-Go ! 🚀
-
-avant d'expliquer re ecrire le code avant
-
-Perfect ! Voici **d'abord le code complet**, puis l'**explication détaillée** de l'Étape 1.4 ! 🚀
+```
 
 ***
-
-# 📝 CODE COMPLET - neuron.py (Étape 1.4 validée)
+# CODE COMPLET - neuron.py (Étape 1.4 validée)
 
 ```python
 # ===== ACTIVATIONS =====
@@ -157,16 +152,16 @@ if __name__ == "__main__":
     print(f"Identity: {n_identity.forward([1, 2])}")  # Attendu : 0.0
     
     print("=" * 50)
-    print("✅ TOUS LES TESTS PASSÉS !")
+    print("TOUS LES TESTS PASSÉS !")
     print("=" * 50)
 ```
 
 
 ***
 
-# 🎓 EXPLICATION COMPLÈTE - Étape 1.4 : Ajouter les activations
+# EXPLICATION COMPLÈTE - Étape 1.4 : Ajouter les activations
 
-## 🧠 Pourquoi les fonctions d'activation ?
+## Pourquoi les fonctions d'activation ?
 
 Sans activation, ton neurone ne fait qu'un **calcul linéaire** :
 
@@ -184,9 +179,9 @@ $$
 
 ***
 
-## 📊 Les 4 fonctions d'activation implémentées
+## Les 4 fonctions d'activation implémentées
 
-### 1️⃣ **Identity (Identité)**
+### **Identity (Identité)**
 
 ```python
 def identity(x):
@@ -195,7 +190,7 @@ def identity(x):
 
 **Mathématique** : $f(z) = z$
 
-**Comportement** : Ne change rien, retourne $z$ tel quel.[^1]
+**Comportement** : Ne change rien, retourne $z$ tel quel.
 
 **Usage** : Uniquement pour tester ou pour la couche de sortie en régression.
 
@@ -206,7 +201,7 @@ def identity(x):
 
 ***
 
-### 2️⃣ **Heaviside (Seuil)**
+### **Heaviside (Seuil)**
 
 ```python
 def heaviside(x):
@@ -219,7 +214,7 @@ $$
 f(z) = \begin{cases} 1 & \text{si } z \geq 0 \\ 0 & \text{si } z < 0 \end{cases}
 $$
 
-**Comportement** : Classification binaire brutale (0 ou 1).[^1]
+**Comportement** : Classification binaire brutale (0 ou 1).
 
 **Usage** : Perceptron classique, portes logiques (AND, OR).
 
@@ -230,7 +225,7 @@ $$
 
 ***
 
-### 3️⃣ **Sigmoid (Sigmoïde)**
+### **Sigmoid (Sigmoïde)**
 
 ```python
 def sigmoid(x):
@@ -244,7 +239,7 @@ $$
 f(z) = \frac{1}{1 + e^{-z}}
 $$
 
-**Comportement** : Transforme n'importe quel nombre en valeur entre 0 et 1.[^1]
+**Comportement** : Transforme n'importe quel nombre en valeur entre 0 et 1.
 
 **Usage** : Interprétation probabiliste (ex : probabilité qu'une photo contienne un chat).
 
@@ -256,7 +251,7 @@ $$
 
 ***
 
-### 4️⃣ **ReLU (Rectified Linear Unit)**
+### **ReLU (Rectified Linear Unit)**
 
 ```python
 def relu(x):
@@ -269,7 +264,7 @@ $$
 f(z) = \max(0, z)
 $$
 
-**Comportement** : Garde les valeurs positives, annule les négatives.[^1]
+**Comportement** : Garde les valeurs positives, annule les négatives.
 
 **Usage** : **LA** fonction d'activation moderne ! Utilisée dans 90% des réseaux profonds.
 
@@ -280,17 +275,17 @@ $$
 
 ***
 
-## 🔗 Lien avec TensorFlow Playground
+## Lien avec TensorFlow Playground
 
 Va sur [playground.tensorflow.org](https://playground.tensorflow.org) et :
 
 1. **Observe les neurones (cercles)** : Chacun applique une activation !
-2. **Change l'activation** (ReLU, Sigmoid, etc.) : Regarde comment les frontières de décision changent.[^1]
+2. **Change l'activation** (ReLU, Sigmoid, etc.) : Regarde comment les frontières de décision changent.
 3. **Compare avec ton code** : Les cercles = tes `Neuron`, les colonnes = tes futurs `Layer` !
 
 ***
 
-## 🔬 Exemple concret : Calcul pas à pas
+## Exemple concret : Calcul pas à pas
 
 ### Configuration du test
 
@@ -320,11 +315,11 @@ $$
 f(0.0) = \frac{1}{1 + e^{0}} = \frac{1}{1 + 1} = 0.5
 $$
 
-✅ **Résultat attendu : 0.5** (ton code devrait afficher ça !)
+**Résultat attendu : 0.5** (ton code devrait afficher ça !)
 
 ***
 
-## 🎯 Ce que tu as réussi à faire
+## Ce que tu as réussi à faire
 
 | **Avant (Étape 1.3)** | **Maintenant (Étape 1.4)** |
 | :-- | :-- |
@@ -335,7 +330,7 @@ $$
 
 ***
 
-## ✅ Validation finale
+## Validation finale
 
 Lance ton code :
 
@@ -355,28 +350,6 @@ Heaviside (0,0): 0
 Heaviside (1,1): 1
 Identity: 0.0
 ==================================================
-✅ TOUS LES TESTS PASSÉS !
+TOUS LES TESTS PASSÉS !
 ==================================================
 ```
-
-
-***
-
-## 🚀 Prochaine étape : JOUR 1 → JOUR 2
-
-Tu as **terminé le JOUR 1** ! 🎉
-
-**Récap de ce que tu maîtrises** :
-
-- ✅ Classe `Neuron` fonctionnelle
-- ✅ Calcul du produit scalaire + biais
-- ✅ 4 fonctions d'activation implémentées
-
-**Prochaine mission (Étape 2.1)** : Créer une **couche de neurones** (Layer) pour passer de 1 neurone à plusieurs neurones qui travaillent ensemble ![^1]
-
-💪 **Bravo, tu progresses comme un pro !** La base de ton réseau de neurones est solide. Continue comme ça ! 🔥
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
-

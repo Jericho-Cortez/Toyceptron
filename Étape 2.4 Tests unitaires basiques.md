@@ -1,26 +1,18 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+##  Objectif de l'étape 2.4
 
-## 📚 RÉCAPITULATIF COMPLET - ÉTAPE 2.4 : Tests unitaires basiques
-
-Je te refais **tout le parcours de l'étape 2.4** avec explications détaillées.[^1]
-
-***
-
-## 🎯 Objectif de l'étape 2.4
-
-**Créer des tests robustes avec des calculs vérifiables manuellement** pour s'assurer que `Neuron` et `Layer` fonctionnent parfaitement avant d'attaquer `Network.py`.[^1]
+**Créer des tests robustes avec des calculs vérifiables manuellement** pour s'assurer que `Neuron` et `Layer` fonctionnent parfaitement avant d'attaquer `Network.py`.
 
 ### Pourquoi cette étape est cruciale ?
 
 - **Sécurité** : Si un bug apparaît plus tard dans `Network`, tu sauras que le problème n'est PAS dans `Neuron` ou `Layer`
 - **Compréhension** : En vérifiant les calculs à la main, tu **comprends vraiment** ce que fait ton code
-- **Professionnalisme** : Les tests unitaires sont la base de tout projet sérieux[^1]
+- **Professionnalisme** : Les tests unitaires sont la base de tout projet sérieux
 
 ***
 
-## 📝 Le fichier `test_manual.py` - Section par section
+##  Le fichier `test_manual.py` - Section par section
 
-### 🔴 Test 1 : Neurone avec poids fixes
+###  Test 1 : Neurone avec poids fixes
 
 ```python
 print("\n[Test 1] Neurone avec poids fixes - Calcul vérifiable")
@@ -28,12 +20,12 @@ n = Neuron(weights=[1, 1], bias=0, activation=identity)
 result = n.forward([2, 3])
 
 print(f"Calcul manuel : 1*2 + 1*3 + 0 = 5")
-assert result == 5, f"❌ ERREUR : attendu 5, obtenu {result}"
-print("✅ Test 1 réussi : Calcul correct")
+assert result == 5, f" ERREUR : attendu 5, obtenu {result}"
+print(" Test 1 réussi : Calcul correct")
 ```
 
 
-#### 📖 Explication détaillée
+####  Explication détaillée
 
 **Ce qu'on teste** : Le calcul du produit scalaire + biais
 
@@ -49,13 +41,13 @@ print("✅ Test 1 réussi : Calcul correct")
 - Ici, tu sais **exactement** ce que tu dois obtenir : 5[^1]
 
 **Ce que ça prouve** :
-✅ Ton produit scalaire fonctionne
-✅ L'addition du biais fonctionne
-✅ La méthode `forward()` retourne le bon résultat
+ Ton produit scalaire fonctionne
+ L'addition du biais fonctionne
+ La méthode `forward()` retourne le bon résultat
 
 ***
 
-### 🔴 Test 2 : Neurone avec ReLU
+###  Test 2 : Neurone avec ReLU
 
 ```python
 print("\n[Test 2] Neurone avec ReLU - Valeur négative")
@@ -65,11 +57,11 @@ result_relu = n_relu.forward([1, 2])
 print(f"Calcul manuel : 1*1 + (-2)*2 + (-1) = 1 - 4 - 1 = -4")
 print(f"Après ReLU : max(0, -4) = 0")
 assert result_relu == 0
-print("✅ Test 2 réussi : ReLU fonctionne correctement")
+print(" Test 2 réussi : ReLU fonctionne correctement")
 ```
 
 
-#### 📖 Explication détaillée
+####  Explication détaillée
 
 **Ce qu'on teste** : La fonction d'activation ReLU sur une valeur **négative**
 
@@ -91,12 +83,12 @@ def relu(x):
 - Si $z > 0$, ReLU retourne simplement $z$ (pas de transformation)[^1]
 
 **Ce que ça prouve** :
-✅ L'activation est bien appliquée après le calcul
-✅ ReLU bloque correctement les valeurs négatives
+ L'activation est bien appliquée après le calcul
+ ReLU bloque correctement les valeurs négatives
 
 ***
 
-### 🔴 Test 3 : Porte logique AND
+###  Test 3 : Porte logique AND
 
 ```python
 print("\n[Test 3] Porte logique AND - Application concrète")
@@ -115,7 +107,7 @@ for inputs, expected in test_cases:
 ```
 
 
-#### 📖 Explication détaillée
+####  Explication détaillée
 
 **Ce qu'on teste** : Un neurone peut **résoudre un problème logique** !
 
@@ -133,10 +125,10 @@ for inputs, expected in test_cases:
 
 Pour chaque cas, on calcule $z = 1 \times A + 1 \times B - 1.5$ :
 
-1. **** : $z = 0 + 0 - 1.5 = -1.5$ → `heaviside(-1.5)` = 0 ✅
-2. **** : $z = 1 + 0 - 1.5 = -0.5$ → `heaviside(-0.5)` = 0 ✅[^1]
-3. **** : $z = 0 + 1 - 1.5 = -0.5$ → `heaviside(-0.5)` = 0 ✅[^1]
-4. **** : $z = 1 + 1 - 1.5 = 0.5$ → `heaviside(0.5)` = 1 ✅[^1]
+1. **** : $z = 0 + 0 - 1.5 = -1.5$ → `heaviside(-1.5)` = 0 
+2. **** : $z = 1 + 0 - 1.5 = -0.5$ → `heaviside(-0.5)` = 0 
+3. **** : $z = 0 + 1 - 1.5 = -0.5$ → `heaviside(-0.5)` = 0 
+4. **** : $z = 1 + 1 - 1.5 = 0.5$ → `heaviside(0.5)` = 1 
 
 **Fonction Heaviside** (seuil) :
 
@@ -150,16 +142,16 @@ Va sur [playground.tensorflow.org](https://playground.tensorflow.org) :
 
 - Dataset : Sélectionne "Circle" ou crée un pattern simple
 - 2 inputs, 1 neurone, activation "ReLU" ou "Linear"
-- Un seul neurone peut tracer **une ligne de séparation**[^1]
+- Un seul neurone peut tracer **une ligne de séparation**
 
 **Ce que ça prouve** :
-✅ Un neurone = un **classificateur linéaire**
-✅ Il peut résoudre AND (séparable linéairement)
-✅ Mais il **ne peut PAS** résoudre XOR (non-séparable linéairement) → besoin d'une couche cachée[^1]
+Un neurone = un **classificateur linéaire**
+Il peut résoudre AND (séparable linéairement)
+Mais il **ne peut PAS** résoudre XOR (non-séparable linéairement) → besoin d'une couche cachée
 
 ***
 
-### 🔴 Test 4 : Layer avec calcul manuel
+### Test 4 : Layer avec calcul manuel
 
 ```python
 print("\n[Test 4] Layer - Vérification d'une couche complète")
@@ -174,11 +166,11 @@ result_layer = layer_test.forward(inputs_test)
 
 assert len(result_layer) == 2
 assert isinstance(result_layer, list)
-print("✅ Test 4 réussi : La couche fonctionne correctement")
+print("Test 4 réussi : La couche fonctionne correctement")
 ```
 
 
-#### 📖 Explication détaillée
+#### Explication détaillée
 
 **Ce qu'on teste** : Une `Layer` retourne bien une **liste de sorties**
 
@@ -210,13 +202,13 @@ output1  output2
 **Sortie** : `[0.887, -0.597]` → Liste de 2 valeurs (1 par neurone)
 
 **Ce que ça prouve** :
-✅ `Layer.forward()` retourne bien une liste
-✅ Chaque neurone reçoit les **mêmes inputs**[^1]
-✅ La taille de la sortie = nombre de neurones
+`Layer.forward()` retourne bien une liste
+Chaque neurone reçoit les **mêmes inputs**[^1]
+La taille de la sortie = nombre de neurones
 
 ***
 
-### 🔴 Test 5 : Reproductibilité avec seed
+### Test 5 : Reproductibilité avec seed
 
 ```python
 print("\n[Test 5] Reproductibilité - Même seed = Mêmes poids")
@@ -229,11 +221,11 @@ layer2 = Layer(num_neurons=3, num_inputs=2, activation=identity)
 result2 = layer2.forward([1.0, 2.0])
 
 assert result1 == result2
-print("✅ Reproductibilité garantie")
+print("Reproductibilité garantie")
 ```
 
 
-#### 📖 Explication détaillée
+#### Explication détaillée
 
 **Ce qu'on teste** : Avec le même `seed`, on obtient **exactement les mêmes résultats**
 
@@ -242,7 +234,7 @@ Imagine ce scénario :
 
 1. Tu lances ton code → bug bizarre
 2. Tu le relances → le bug **a disparu** (poids différents !)
-3. Impossible de déboguer 😱
+3. Impossible de déboguer 
 
 **Solution** : `random.seed(42)` fixe l'aléatoire
 
@@ -263,12 +255,12 @@ Résultat 2 : [-2.071, 0.745, -1.024]
 ```
 
 **Ce que ça prouve** :
-✅ Le `seed` contrôle bien la génération aléatoire
-✅ Tu peux **reproduire n'importe quel bug** pour le déboguer[^1]
+Le `seed` contrôle bien la génération aléatoire
+Tu peux **reproduire n'importe quel bug** pour le déboguer[^1]
 
 ***
 
-### 🔴 Test 6 : Gestion d'erreur
+### Test 6 : Gestion d'erreur
 
 ```python
 print("\n[Test 6] Gestion des erreurs - Paramètres invalides")
@@ -276,11 +268,11 @@ try:
     n_error = Neuron(weights=None, num_inputs=None)
     print("❌ ÉCHEC : L'erreur n'a pas été levée")
 except ValueError as e:
-    print(f"✅ Erreur correctement levée : {e}")
+    print(f" Erreur correctement levée : {e}")
 ```
 
 
-#### 📖 Explication détaillée
+#### Explication détaillée
 
 **Ce qu'on teste** : Ton code refuse les **paramètres invalides**
 
@@ -303,17 +295,17 @@ if weights is None:
 **Résultat attendu** :
 
 ```
-✅ Erreur correctement levée : Si weights=None, num_inputs doit être fourni
+Erreur correctement levée : Si weights=None, num_inputs doit être fourni
 ```
 
 **Ce que ça prouve** :
-✅ Ton code ne plante pas silencieusement
-✅ Il donne un **message d'erreur clair**[^1]
-✅ Protection contre les utilisations incorrectes
+Ton code ne plante pas silencieusement
+Il donne un **message d'erreur clair**[^1]
+Protection contre les utilisations incorrectes
 
 ***
 
-### 🔴 Test 7 : Sigmoid avec z=0
+### Test 7 : Sigmoid avec z=0
 
 ```python
 print("\n[Test 7] Activation Sigmoid - Valeur z=0")
@@ -327,7 +319,7 @@ print("✅ Test 7 réussi : Sigmoid fonctionne correctement")
 ```
 
 
-#### 📖 Explication détaillée
+#### Explication détaillée
 
 **Ce qu'on teste** : La fonction **sigmoid** au point $z = 0$
 
@@ -356,12 +348,12 @@ def sigmoid(x):
 - Si $\sigma(0) \neq 0.5$, il y a un bug dans l'implémentation[^1]
 
 **Ce que ça prouve** :
-✅ Sigmoid est correctement implémentée
-✅ L'activation est appliquée après le calcul
+Sigmoid est correctement implémentée
+L'activation est appliquée après le calcul
 
 ***
 
-## 🎓 Synthèse : Ce que chaque test valide
+## Synthèse : Ce que chaque test valide
 
 | Test | Ce qu'il vérifie | Pourquoi c'est important |
 | :-- | :-- | :-- |
@@ -376,7 +368,7 @@ def sigmoid(x):
 
 ***
 
-## 🧠 Concepts clés à retenir
+## Concepts clés à retenir
 
 ### 1. Tests avec poids fixes vs aléatoires
 
@@ -417,7 +409,7 @@ n2 = Neuron(num_inputs=3)  # Poids : [0.278, -0.949, 0.784]
 
 ***
 
-## 🔗 Lien avec TensorFlow Playground
+## Lien avec TensorFlow Playground
 
 Va sur [playground.tensorflow.org](https://playground.tensorflow.org) et fais cette expérience :
 
@@ -439,32 +431,15 @@ Va sur [playground.tensorflow.org](https://playground.tensorflow.org) et fais ce
 
 ***
 
-## ✅ Checklist finale de l'étape 2.4
+## Checklist finale de l'étape 2.4
 
 Avant de passer au JOUR 3, tu dois pouvoir répondre OUI à tout :
 
-- [ ] Je comprends pourquoi on utilise des **poids fixes** pour les tests[^1]
-- [ ] Je sais calculer manuellement un forward pass (produit scalaire + biais + activation)
-- [ ] Je comprends qu'un neurone = **une ligne de séparation**[^1]
-- [ ] Je sais pourquoi AND fonctionne avec 1 neurone mais pas XOR[^1]
-- [ ] Je comprends le rôle de `random.seed()`[^1]
-- [ ] Je sais que `Layer.forward()` retourne une **liste**[^1]
-- [ ] Tous mes tests affichent `✅`
-
-***
-
-## 🚀 Prochaine étape : JOUR 3
-
-Tu vas maintenant coder `Network.py` qui enchaîne plusieurs `Layer` :
-
-```
-Input → Layer1 → Layer2 → Output
-[x1,x2] → [h1,h2,h3] → [y1]
-```
-
-**Es-tu prêt à attaquer le JOUR 3 ?** 💪🔥
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
+- [x] Je comprends pourquoi on utilise des **poids fixes** pour les tests[^1]
+- [x] Je sais calculer manuellement un forward pass (produit scalaire + biais + activation)
+- [x] Je comprends qu'un neurone = **une ligne de séparation**[^1]
+- [x] Je sais pourquoi AND fonctionne avec 1 neurone mais pas XOR[^1]
+- [x] Je comprends le rôle de `random.seed()`[^1]
+- [x] Je sais que `Layer.forward()` retourne une **liste**[^1]
+- [x] Tous mes tests affichent `✅`
 

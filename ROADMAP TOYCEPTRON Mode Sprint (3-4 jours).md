@@ -419,43 +419,7 @@ if __name__ == "__main__":
 
 ---
 
-## ✅ Étape 3.3 : Intégration avec le `main.py` fourni (1h30)
-
-**Objectif :** Faire tourner le code de ton prof
-
-**Actions :**
-
-1. Ouvre le PDF de ton énoncé (dans l'espace)
-    
-2. Copie le `main.py` fourni
-    
-3. Vérifie que ton code est compatible :
-    
-    - Noms de classes corrects ?
-        
-    - Noms de méthodes corrects ?
-        
-    - Ordre des paramètres correct ?
-        
-4. **Lance :** `python main.py`
-    
-5. **Debug les erreurs** (c'est normal d'en avoir !)
-    
-
-**Erreurs courantes :**
-
-- `AttributeError` → Méthode manquante
-    
-- `TypeError` → Mauvais nombre de paramètres
-    
-- `ValueError` → Mauvaise dimension de données
-    
-
-**✨ Validation** : Le `main.py` s'exécute jusqu'au bout sans crash
-
----
-
-## ✅ Étape 3.4 : Vérifications et ajustements (1h)
+## ✅ Étape 3.3 : Vérifications et ajustements (1h)
 
 **Checklist finale :**
 

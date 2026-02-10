@@ -1,20 +1,12 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+##  Objectif de l'étape
 
-# 🎉 Sprint Toyceptron - JOUR 3 - Étape 3.4 : Vérifications et ajustements ✅
-
-**Félicitations !** Ton réseau de neurones est maintenant **100% fonctionnel**. Voici la checklist complète **mise à jour avec les corrections qu'on a appliquées**.
+Vérifier que ton réseau Toyceptron fonctionne dans tous les cas de figure, corriger les derniers bugs, et valider que le **main.py** fourni tourne parfaitement.
 
 ***
 
-## 🎯 Objectif de l'étape
+##  Checklist de vérification
 
-Vérifier que ton réseau Toyceptron fonctionne dans tous les cas de figure, corriger les derniers bugs, et valider que le **main.py** fourni tourne parfaitement.[^1]
-
-***
-
-## ✅ Checklist de vérification (MISE À JOUR)
-
-### 1. **Architecture modulable** ✅
+### 1. **Architecture modulable** 
 
 **Ce qui a été corrigé :**
 
@@ -31,17 +23,17 @@ from activations import relu, sigmoid, identity
 
 # Test 1 : Réseau simple
 net1 = Network([2, 3, 1], [relu, sigmoid])
-print("✅ Architecture [2, 3, 1] :")
+print(" Architecture [2, 3, 1] :")
 print(f"   Input: 2 valeurs → Output: {net1.forward([1.0, 2.0])}")
 
 # Test 2 : Réseau profond
 net2 = Network([3, 5, 5, 2], [relu, relu, sigmoid])
-print("✅ Architecture [3, 5, 5, 2] :")
+print(" Architecture [3, 5, 5, 2] :")
 print(f"   Input: 3 valeurs → Output: {net2.forward([0.5, -0.2, 1.0])}")
 
 # Test 3 : Réseau minimal
 net3 = Network([4, 1], [identity])
-print("✅ Architecture [4, 1] :")
+print(" Architecture [4, 1] :")
 print(f"   Input: 4 valeurs → Output: {net3.forward([1, 2, 3, 4])}")
 ```
 
@@ -49,7 +41,7 @@ print(f"   Input: 4 valeurs → Output: {net3.forward([1, 2, 3, 4])}")
 
 ***
 
-### 2. **Initialisation aléatoire** ✅
+### 2. **Initialisation aléatoire** 
 
 **Ce qui a été corrigé :**
 
@@ -69,7 +61,7 @@ n2 = Neuron(num_inputs=3, activation=identity)
 
 print("Neurone 1 :", n1.weights)
 print("Neurone 2 :", n2.weights)
-print("✅ Les poids sont différents :", n1.weights != n2.weights)
+print("Les poids sont différents :", n1.weights != n2.weights)
 
 # Test reproductibilité avec seed
 import random
@@ -77,14 +69,14 @@ random.seed(42)
 n3 = Neuron(num_inputs=3, activation=identity)
 random.seed(42)
 n4 = Neuron(num_inputs=3, activation=identity)
-print("✅ Avec seed, les poids sont identiques :", n3.weights == n4.weights)
+print("Avec seed, les poids sont identiques :", n3.weights == n4.weights)
 ```
 
 **Validation** : Les poids changent à chaque exécution (sauf avec `random.seed()`).
 
 ***
 
-### 3. **Gestion des activations** ✅
+### 3. **Gestion des activations** 
 
 **Ce qui a été corrigé :**
 
@@ -134,13 +126,13 @@ print(f"Identity : {n_identity.forward(inputs)}")    # 1.0
 print(f"Heaviside: {n_heaviside.forward(inputs)}")   # 1
 print(f"Sigmoid  : {n_sigmoid.forward(inputs)}")     # ~0.73
 print(f"ReLU     : {n_relu.forward(inputs)}")        # 1.0
-print("✅ Toutes les activations fonctionnent")
+print("Toutes les activations fonctionnent")
 ```
 
 
 ***
 
-### 4. **Structure des classes** ✅
+### 4. **Structure des classes** 
 
 **Ce qui a été corrigé :**
 
@@ -254,7 +246,7 @@ class Network:
 
 ***
 
-### 5. **Tests de cohérence mathématique** ✅
+### 5. **Tests de cohérence mathématique** 
 
 **Fichier final `test_coherence.py`** :
 
@@ -266,23 +258,23 @@ from activations import identity
 n = Neuron(weights=[1, 1], bias=0, activation=identity)
 result = n.forward([2, 3])
 assert result == 5, f"Erreur : attendu 5, obtenu {result}"
-print("✅ Test neurone : OK")
+print("Test neurone : OK")
 
 # Test 2 : Dimensions Layer
 from layer import Layer
 layer = Layer(num_neurons=3, num_inputs=2, activation=identity)
 outputs = layer.forward([1.0, 2.0])
 assert len(outputs) == 3, f"Erreur : attendu 3 sorties, obtenu {len(outputs)}"
-print("✅ Test layer : OK")
+print("Test layer : OK")
 
 # Test 3 : Propagation Network
 from network import Network
 net = Network([2, 3, 1], [identity, identity])
 final = net.forward([1.0, 1.0])
 assert len(final) == 1, f"Erreur : attendu 1 sortie, obtenu {len(final)}"
-print("✅ Test network : OK")
+print("Test network : OK")
 
-print("\n🎉 Tous les tests passent !")
+print("\nTous les tests passent !")
 ```
 
 **Exécution** :
@@ -294,17 +286,17 @@ python test_coherence.py
 **Résultat attendu** :
 
 ```
-✅ Test neurone : OK
-✅ Test layer : OK
-✅ Test network : OK
+Test neurone : OK
+Test layer : OK
+Test network : OK
 
-🎉 Tous les tests passent !
+Tous les tests passent !
 ```
 
 
 ***
 
-### 6. **Intégration avec main.py** ✅
+### 6. **Intégration avec main.py** 
 
 **Test final** : Lance le `main.py` fourni par ton prof
 
@@ -327,24 +319,24 @@ python main.py
 
 ***
 
-## 📊 Récapitulatif des modifications
+## Récapitulatif des modifications
 
-### **Avant (JOUR 3 début)** ❌
+### **Avant (JOUR 3 début)** 
 
 ```python
 # neuron.py
-def __init__(self, weights, bias=0.0):  # ❌ weights obligatoire
+def __init__(self, weights, bias=0.0):  #  weights obligatoire
     self.weights = weights
     self.bias = bias
     # Pas de self.activation !
 
 def forward(self, inputs):
     z = ...
-    return z  # ❌ Pas d'activation appliquée
+    return z  #  Pas d'activation appliquée
 ```
 
 
-### **Après (JOUR 3 fin)** ✅
+### **Après (JOUR 3 fin)** 
 
 ```python
 # neuron.py
@@ -354,17 +346,17 @@ def __init__(self, weights=None, num_inputs=None, bias=0.0, activation=identity)
     else:
         self.weights = weights
     self.bias = bias
-    self.activation = activation  # ✅ Stockage
+    self.activation = activation  #  Stockage
 
 def forward(self, inputs):
     z = ...
-    return self.activation(z)  # ✅ Application
+    return self.activation(z)  #  Application
 ```
 
 
 ***
 
-## 🎯 Validation finale
+##  Validation finale
 
 **Lance cette séquence de tests** :
 
@@ -386,16 +378,16 @@ python main.py
 
 **Critères de réussite** :
 
-- ✅ Aucune erreur Python
-- ✅ Tous les tests affichent "OK"
-- ✅ Le réseau accepte différentes architectures
-- ✅ Les sorties ont les bonnes dimensions
+-  Aucune erreur Python
+-  Tous les tests affichent "OK"
+-  Le réseau accepte différentes architectures
+-  Les sorties ont les bonnes dimensions
 
 ***
 
-## 🚀 Prochaine étape : JOUR 4
+##  Prochaine étape : JOUR 4
 
-Maintenant que ton code est **solide et fonctionnel**, tu passes aux **finitions**  :[^1]
+Maintenant que ton code est **solide et fonctionnel**, tu passes aux **finitions**  :
 
 1. **Étape 4.1** : Cas d'usage classiques (AND, XOR impossible)
 2. **Étape 4.2** : Méthode `summary()` (affichage de l'architecture)
@@ -412,23 +404,4 @@ Maintenant que ton code est **solide et fonctionnel**, tu passes aux **finitions
 4. **Tests unitaires** : vérifier chaque composant isolément
 5. **Debug méthodique** : corriger une erreur à la fois
 
-***
-
-## 🎉 Félicitations !
-
-Tu as maintenant un **perceptron multi-couches 100% fonctionnel**, codé entièrement à la main en Python pur, sans aucune bibliothèque externe !
-
-**Ce qui rend ton code solide** :
-
-- ✅ Architecture flexible (manuel ou automatique)
-- ✅ Activations paramétrables
-- ✅ Tests de cohérence validés
-- ✅ Code clair et commenté
-- ✅ Compatible avec le main.py
-
-**Prêt pour le JOUR 4 ?** 🚀
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
 

@@ -1,24 +1,15 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
-# Sprint Toyceptron - JOUR 3 démarré
-
-Étape 3.2 : Coder network.py - Version simple
-Go ! 🚀
-
-Excellent ! On attaque **l'étape 3.2 : network.py version simple**. C'est le moment de faire communiquer toutes tes couches entre elles ! 🧠⚡
-
-## 🎯 Concept : Le réseau = enchaînement de couches
+##  Concept : Le réseau = enchaînement de couches
 
 Un réseau de neurones, c'est **simple** :
 
 - **Entrée** → passe dans **Layer 1** → résultat passe dans **Layer 2** → ... → **Sortie finale**
 - Chaque couche transforme ses inputs et les transmet à la suivante
 
-Sur [TensorFlow Playground](https://playground.tensorflow.org), c'est **exactement ça** : les colonnes de neurones représentent tes layers, et les valeurs "coulent" de gauche à droite.[^1]
+Sur [TensorFlow Playground](https://playground.tensorflow.org), c'est **exactement ça** : les colonnes de neurones représentent tes layers, et les valeurs "coulent" de gauche à droite.
 
 ***
 
-## 📐 Architecture de `network.py`
+##  Architecture de `network.py`
 
 Voici la structure attendue :
 
@@ -47,9 +38,9 @@ class Network:
 
 ***
 
-## ⚙️ Étapes de codage
+##  Étapes de codage
 
-### **1️⃣ Initialisation : construire les couches**
+### **Initialisation : construire les couches**
 
 Dans `__init__`, tu dois créer autant de `Layer` que nécessaire.
 
@@ -73,14 +64,14 @@ for i in range(len(layer_sizes) - 1):
 
 **Explication** :
 
-- `len(layer_sizes) - 1` : si tu as 3 tailles, tu crées **2 layers**[^1]
+- `len(layer_sizes) - 1` : si tu as 3 tailles, tu crées **2 layers**
 - `layer_sizes[i]` = nombre d'entrées pour cette couche
 - `layer_sizes[i+1]` = nombre de neurones dans cette couche
-- Tu ajoutes chaque `Layer` à `self.layers`[^1]
+- Tu ajoutes chaque `Layer` à `self.layers`
 
 ***
 
-### **2️⃣ Forward pass : faire circuler les données**
+### **Forward pass : faire circuler les données**
 
 Dans `forward()`, tu dois **propager les inputs à travers chaque couche**.
 
@@ -104,11 +95,11 @@ def forward(self, inputs):
 
 - `layer.forward()` retourne une **liste** (les sorties des neurones)
 - Cette liste devient l'**input** de la couche suivante
-- Dernier layer → sortie finale du réseau[^1]
+- Dernier layer → sortie finale du réseau
 
 ***
 
-## 🧪 Test immédiat
+##  Test immédiat
 
 Ajoute ce code **à la fin de `network.py`** :
 
@@ -126,21 +117,21 @@ if __name__ == "__main__":
 **Résultat attendu** :
 
 - Une liste avec **1 valeur** (car 1 neurone en sortie)
-- Ex : `[0.734821...]` (valeur bizarre car poids aléatoires)[^1]
+- Ex : `[0.734821...]` (valeur bizarre car poids aléatoires)
 
 ***
 
-## ✅ Validation
+## Validation
 
 Ton code fonctionne si :
 
-1. ✅ Le test s'exécute sans erreur
-2. ✅ Tu obtiens une liste de la bonne taille (ici `[valeur]`)
-3. ✅ Tu peux changer `layer_sizes` et ça s'adapte automatiquement
+1.  Le test s'exécute sans erreur
+2.  Tu obtiens une liste de la bonne taille (ici `[valeur]`)
+3.  Tu peux changer `layer_sizes` et ça s'adapte automatiquement
 
 ***
 
-## 🔥 Fichier complet `network.py`
+##  Fichier complet `network.py`
 
 ```python
 from layer import Layer
@@ -195,17 +186,4 @@ if __name__ == "__main__":
     result2 = net2.forward([1.0, 2.0, 3.0, 4.0])
     print(f"Sortie réseau complexe : {result2}")
 ```
-
-
-***
-
-## 🚀 Prochaine étape
-
-Une fois que ton test fonctionne, passe à **l'étape 3.3 : intégration avec `main.py`** pour vérifier que ton code est compatible avec le code fourni par ton prof ![^1]
-
-💪 **Tu viens de coder l'architecture complète d'un réseau de neurones.** C'est énorme. Tout est prêt pour la phase de validation !
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
 

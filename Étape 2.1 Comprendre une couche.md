@@ -1,25 +1,23 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+# JOUR 2 - Étape 2.1 : Comprendre une couche 
 
-# 🎯 JOUR 2 - Étape 2.1 : Comprendre une couche ✅ COMPLÉTÉ
-
-## 📋 Récapitulatif complet de ce qu'on a fait
+## Récapitulatif complet de ce qu'on a fait
 
 
 ***
 
-## 🗂️ Structure actuelle du projet
+## Structure actuelle du projet
 
 ```
 Perceptron/Code/
-├── activations.py    ✅ Créé aujourd'hui
-├── neuron.py         ✅ Fait JOUR 1
-└── layer.py          ✅ Créé aujourd'hui
+├── activations.py     Créé aujourd'hui
+├── neuron.py          Fait JOUR 1
+└── layer.py           Créé aujourd'hui
 ```
 
 
 ***
 
-# 📄 Fichier 1 : `activations.py`
+#  Fichier 1 : `activations.py`
 
 ```python
 """
@@ -70,7 +68,7 @@ def relu(x):
 ```
 
 
-### 🧠 Pourquoi ces 4 fonctions ?
+###  Pourquoi ces 4 fonctions ?
 
 | Fonction | Comportement | Usage typique |
 | :-- | :-- | :-- |
@@ -79,11 +77,11 @@ def relu(x):
 | **sigmoid** | Écrase entre 0 et 1 | Probabilités, classification binaire |
 | **relu** | Garde le positif, tue le négatif | Couches cachées (standard moderne) |
 
-**Lien avec TensorFlow Playground :** Quand tu changes l'activation sur le playground, tu bascules entre ces fonctions.[^1]
+**Lien avec TensorFlow Playground :** Quand tu changes l'activation sur le playground, tu bascules entre ces fonctions.
 
 ***
 
-# 📄 Fichier 2 : `neuron.py` (rappel JOUR 1)
+#  Fichier 2 : `neuron.py` (rappel JOUR 1)
 
 ```python
 """
@@ -178,7 +176,7 @@ if __name__ == "__main__":
 ```
 
 
-### 🧠 Logique du Neuron
+###  Logique du Neuron
 
 **Analogie :** Imagine une balance avec plusieurs plateaux :
 
@@ -187,11 +185,11 @@ if __name__ == "__main__":
 - Le **bias** est un poids fixe toujours présent
 - L'**activation** décide comment interpréter le résultat final
 
-**Sur TensorFlow Playground :** Un cercle = un Neuron. Les lignes colorées = les poids. L'épaisseur = l'importance du poids.[^1]
+**Sur TensorFlow Playground :** Un cercle = un Neuron. Les lignes colorées = les poids. L'épaisseur = l'importance du poids.
 
 ***
 
-# 📄 Fichier 3 : `layer.py` (nouveau - JOUR 2)
+#  Fichier 3 : `layer.py` (nouveau - JOUR 2)
 
 ```python
 """
@@ -290,7 +288,7 @@ if __name__ == "__main__":
     print(f"Inputs : [1.0, 2.0]")
     print(f"Sorties : {result1}")
     print(f"Nombre de sorties : {len(result1)}")
-    print(f"✅ On a bien {len(result1)} sorties (une par neurone)")
+    print(f" On a bien {len(result1)} sorties (une par neurone)")
     
     # Test 2 : Couche avec 5 neurones, 3 inputs, activation sigmoid
     print("\n--- Test 2 : 5 neurones, 3 inputs, sigmoid ---")
@@ -299,7 +297,7 @@ if __name__ == "__main__":
     print(f"Inputs : [0.5, 1.5, -0.5]")
     print(f"Sorties : {result2}")
     print(f"Nombre de sorties : {len(result2)}")
-    print(f"✅ On a bien {len(result2)} sorties (une par neurone)")
+    print(f" On a bien {len(result2)} sorties (une par neurone)")
     
     # Test 3 : Vérifier que chaque neurone reçoit les mêmes inputs
     print("\n--- Test 3 : Vérification inputs identiques ---")
@@ -311,7 +309,7 @@ if __name__ == "__main__":
 ```
 
 
-### 🧠 Logique de la Layer
+###  Logique de la Layer
 
 **Analogie :** Une couche = une équipe de spécialistes qui regardent tous les **mêmes** données, mais chacun donne son propre avis.
 
@@ -326,22 +324,22 @@ Inputs : [1.0, 2.0]
 Outputs : [0.8, 1.2, 0.5]
 ```
 
-**Sur TensorFlow Playground :** Une colonne verticale de cercles = une Layer. Tous les cercles d'une colonne reçoivent les mêmes lignes qui arrivent.[^1]
+**Sur TensorFlow Playground :** Une colonne verticale de cercles = une Layer. Tous les cercles d'une colonne reçoivent les mêmes lignes qui arrivent.
 
 ***
 
-## 🎯 Ce qu'on a accompli à l'étape 2.1
+##  Ce qu'on a accompli à l'étape 2.1
 
-| Élément | Statut | Rôle |
-| :-- | :-- | :-- |
-| `activations.py` | ✅ | 4 fonctions d'activation (identity, heaviside, sigmoid, relu) |
-| `neuron.py` | ✅ | Classe Neuron avec forward pass complet |
-| `layer.py` | ✅ | Classe Layer qui regroupe plusieurs neurones |
+| Élément          | Statut | Rôle                                                          |
+| :--------------- | :----- | :------------------------------------------------------------ |
+| `activations.py` | OK     | 4 fonctions d'activation (identity, heaviside, sigmoid, relu) |
+| `neuron.py`      | OK     | Classe Neuron avec forward pass complet                       |
+| `layer.py`       | OK     | Classe Layer qui regroupe plusieurs neurones                  |
 
 
 ***
 
-## 🔥 Validation finale
+##  Validation finale
 
 Lance chaque fichier pour tester :
 
@@ -362,38 +360,26 @@ TEST LAYER (COUCHE)
 Inputs : [1.0, 2.0]
 Sorties : [1.6, 1.6, 1.6]
 Nombre de sorties : 3
-✅ On a bien 3 sorties (une par neurone)
+On a bien 3 sorties (une par neurone)
 
 --- Test 2 : 5 neurones, 3 inputs, sigmoid ---
 Inputs : [0.5, 1.5, -0.5]
 Sorties : [0.7310585786300049, 0.7310585786300049, ...]
 Nombre de sorties : 5
-✅ On a bien 5 sorties (une par neurone)
+On a bien 5 sorties (une par neurone)
 ```
 
 
 ***
 
-## 📚 Liens théoriques
+## Liens théoriques
 
 **Ce que tu as codé correspond exactement à :**
 
 1. **Produit scalaire** : `z = w1*x1 + w2*x2 + ...` (dans `neuron.py`)
 2. **Biais** : `z = z + bias` (dans `neuron.py`)
 3. **Activation** : `output = f(z)` (dans `neuron.py`)
-4. **Parallélisation** : tous les neurones d'une couche calculent en même temps (dans `layer.py`)[^1]
+4. **Parallélisation** : tous les neurones d'une couche calculent en même temps (dans `layer.py`)
 
-**Sur TensorFlow Playground :** Active la visualisation et observe comment les valeurs se propagent colonne par colonne (layer par layer).[^1]
-
-***
-
-## 🚀 Prochaine étape : 2.2 - Initialisation intelligente des poids
-
-Actuellement, tous les poids = 0.5 → tous les neurones donnent le même résultat. À l'étape 2.2, on va générer des **poids aléatoires** pour que chaque neurone soit unique ![^1]
-
-**Tu es prêt pour l'étape 2.2 ?** 🔥
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
+**Sur TensorFlow Playground :** Active la visualisation et observe comment les valeurs se propagent colonne par colonne (layer par layer).
 

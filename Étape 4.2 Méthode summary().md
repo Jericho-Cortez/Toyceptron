@@ -1,9 +1,6 @@
+##  Objectif de l'étape 4.2
 
-# 📚 RÉCAPITULATIF COMPLET - Sprint Toyceptron JOUR 4 - Étape 4.2
-
-## 🎯 Objectif de l'étape 4.2
-
-**Ajouter une méthode `summary()` dans la classe `Network`** pour afficher l'architecture du réseau de manière claire et lisible.[^1]
+**Ajouter une méthode `summary()` dans la classe `Network`** pour afficher l'architecture du réseau de manière claire et lisible.
 
 Cette méthode permet de **visualiser rapidement** :
 
@@ -14,7 +11,7 @@ Cette méthode permet de **visualiser rapidement** :
 
 ***
 
-## 🔍 Pourquoi cette méthode est importante ?
+##  Pourquoi cette méthode est importante ?
 
 ### Inspiration : TensorFlow/Keras
 
@@ -24,7 +21,7 @@ Dans les frameworks professionnels, on fait :
 model.summary()
 ```
 
-Et on obtient un aperçu complet de l'architecture. C'est un **outil de debugging indispensable**.[^1]
+Et on obtient un aperçu complet de l'architecture. C'est un **outil de debugging indispensable**.
 
 ### Dans Toyceptron
 
@@ -38,9 +35,9 @@ Sans `summary()`, impossible de vérifier rapidement si l'architecture est corre
 
 ***
 
-## 🛠️ Ce qu'on a fait - Chronologie complète
+##  Ce qu'on a fait - Chronologie complète
 
-### **Étape 1 : Diagnostic initial** 🔍
+### **Étape 1 : Diagnostic initial** 
 
 **Problème rencontré :**
 
@@ -58,7 +55,7 @@ TypeError: Network.__init__() got an unexpected keyword argument 'input_size'
 
 ***
 
-### **Étape 2 : Adaptation du constructeur** 🔧
+### **Étape 2 : Adaptation du constructeur** 
 
 #### Code ajouté dans `network.py` :
 
@@ -166,7 +163,7 @@ net.add(weights=[...], biases=[...])  # Ajout manuel des couches
 
 ***
 
-### **Étape 3 : Problème avec `.add()`** 🐛
+### **Étape 3 : Problème avec `.add()`** 
 
 **Erreur suivante :**
 
@@ -241,7 +238,7 @@ def add(self, layer=None, weights=None, biases=None, activation=None):
 
 ***
 
-### **Étape 4 : Adaptation de `layer.py`** 🔧
+### **Étape 4 : Adaptation de `layer.py`** 
 
 **Problème :**
 
@@ -329,7 +326,7 @@ layer = Layer(
 
 ***
 
-### **Étape 5 : Fix de `neuron.py`** 🐛
+### **Étape 5 : Fix de `neuron.py`** 
 
 **Problème :**
 
@@ -357,7 +354,7 @@ class Neuron:
         
         self.bias = bias
         
-        # ✅ CORRECTION : Activation par défaut = identity
+        # CORRECTION : Activation par défaut = identity
         if activation is None:
             from activations import identity
             self.activation = identity
@@ -387,7 +384,7 @@ else:
 
 ***
 
-### **Étape 6 : Ajout des méthodes utilitaires** 🛠️
+### **Étape 6 : Ajout des méthodes utilitaires** 
 
 #### `forward()` et `feedforward()`
 
@@ -421,7 +418,7 @@ Les deux font **exactement la même chose** (alias).
 
 ***
 
-### **Étape 7 : ENFIN - La méthode `summary()` !** 🎯
+### **Étape 7 : ENFIN - La méthode `summary()` !** 
 
 C'était l'objectif initial de l'étape 4.2 !
 
@@ -436,7 +433,7 @@ def summary(self):
     print("=" * 60)
     
     if len(self.layers) == 0:
-        print("⚠️  Réseau vide - Aucune couche ajoutée")
+        print("Réseau vide - Aucune couche ajoutée")
     else:
         for i, layer in enumerate(self.layers):
             num_neurons = len(layer.neurons)
@@ -498,7 +495,7 @@ print(f"Layer {i+1}: {num_inputs} inputs → {num_neurons} neurones | Activation
 
 ***
 
-## 🎉 Résultat final
+##  Résultat final
 
 ### Sortie de `net.summary()` :
 
@@ -530,9 +527,9 @@ Output (1 valeur)
 
 ***
 
-## 📚 Fichiers finaux complets
+##  Fichiers finaux complets
 
-### 1️⃣ **neuron.py** (complet)
+###  **neuron.py** (complet)
 
 ```python
 import random
@@ -593,7 +590,7 @@ class Neuron:
 
 ***
 
-### 2️⃣ **layer.py** (complet)
+###  **layer.py** (complet)
 
 ```python
 from neuron import Neuron
@@ -665,7 +662,7 @@ class Layer:
 
 ***
 
-### 3️⃣ **network.py** (complet et final)
+###  **network.py** (complet et final)
 
 ```python
 from layer import Layer
@@ -807,7 +804,7 @@ class Network:
 
 ***
 
-## 🎓 Concepts clés compris
+##  Concepts clés compris
 
 ### 1. **Architecture multi-modes**
 
@@ -836,31 +833,12 @@ Checks de dimensions, types, cohérence des paramètres → **code production-re
 
 ***
 
-## ✅ Validation finale - Étape 4.2 COMPLÈTE
+##  Validation finale - Étape 4.2 COMPLÈTE
 
 ### Ce qui fonctionne parfaitement :
 
-✅ **Neuron** : Calcul, activation, poids fixes/aléatoires
-✅ **Layer** : Construction multi-modes, forward pass
-✅ **Network** : 3 modes de construction, add(), forward(), feedforward()
-✅ **summary()** : Affichage clair de l'architecture ← **OBJECTIF ATTEINT** 🎯
-✅ **Compatibilité** : main.py du prof fonctionne à 100%
-
-***
-
-## 🚀 Prochaine étape
-
-**Étape 4.3 : README.md** (30 min)[^1]
-
-Tu veux :
-
-1. **Passer à la documentation (README.md)** ?
-2. **Faire une pause et sauvegarder** ?
-3. **Ajouter des bonus** (forward_debug, perceptron AND/OR) ?
-
-Dis-moi ! 💪🔥
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
-
+ **Neuron** : Calcul, activation, poids fixes/aléatoires
+ **Layer** : Construction multi-modes, forward pass
+ **Network** : 3 modes de construction, add(), forward(), feedforward()
+ **summary()** : Affichage clair de l'architecture ← **OBJECTIF ATTEINT** 🎯
+ **Compatibilité** : main.py du prof fonctionne à 100%

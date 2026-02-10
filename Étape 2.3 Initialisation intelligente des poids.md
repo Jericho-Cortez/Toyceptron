@@ -1,19 +1,4 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
-# oui je veux bien
-
-Parfait ! D'après la roadmap, voici le contenu détaillé de **l'Étape 2.3 : Initialisation intelligente des poids**.[^1]
-
-***
-
-# 📚 ÉTAPE 2.3 : Initialisation intelligente des poids
-
-**Durée estimée** : 1h
-**Objectif** : Rendre ton neurone autonome en générant des poids aléatoires au lieu de les fixer manuellement.[^1]
-
-***
-
-## 🎯 Pourquoi cette étape est cruciale ?
+#  Pourquoi cette étape est cruciale ?
 
 Jusqu'à maintenant, tu initialisais manuellement les poids de tes neurones :
 
@@ -21,18 +6,18 @@ Jusqu'à maintenant, tu initialisais manuellement les poids de tes neurones :
 n = Neuron(weights=[0.5, -0.3], bias=0.1)
 ```
 
-**Problème** : Dans un vrai réseau avec 100 neurones et 50 entrées, tu ne vas pas écrire 5000 poids à la main ![^1]
+**Problème** : Dans un vrai réseau avec 100 neurones et 50 entrées, tu ne vas pas écrire 5000 poids à la main !
 
 **Solution** : Génération automatique de poids aléatoires.
 
 ***
 
-## 🔴 Problème initial : Tous les poids à 0.5
+##  Problème initial : Tous les poids à 0.5
 
 Si tu initialises tous les poids avec la même valeur :
 
 ```python
-# ❌ MAUVAIS
+#  MAUVAIS
 self.weights = [0.5, 0.5, 0.5]
 ```
 
@@ -40,11 +25,11 @@ self.weights = [0.5, 0.5, 0.5]
 
 - Tous les neurones d'une même couche apprennent la même chose (symétrie)
 - Le réseau ne peut pas capturer des patterns complexes
-- Sur TensorFlow Playground, les neurones resteraient identiques[^1]
+- Sur TensorFlow Playground, les neurones resteraient identiques
 
 ***
 
-## ✅ Solution 1 : Poids aléatoires
+##  Solution 1 : Poids aléatoires
 
 ### Implémentation dans `neuron.py`
 
@@ -84,7 +69,7 @@ class Neuron:
 **1. Paramètre `weights=None`** :
 
 - Si tu fournis des poids → ils sont utilisés directement
-- Si tu ne fournis rien → ils sont générés automatiquement[^1]
+- Si tu ne fournis rien → ils sont générés automatiquement
 
 **2. `random.uniform(-1, 1)`** :
 
@@ -94,11 +79,11 @@ class Neuron:
 **3. Protection d'erreur** :
 
 - Si `weights=None` ET `num_inputs=None` → impossible de savoir combien de poids générer
-- Le code lève une erreur explicite[^1]
+- Le code lève une erreur explicite
 
 ***
 
-## 🧪 Test de la génération aléatoire
+##  Test de la génération aléatoire
 
 Crée un fichier de test rapide :
 
@@ -118,7 +103,7 @@ n2 = Neuron(num_inputs=3)
 n3 = Neuron(num_inputs=3)
 print(f"Neurone 2 : {n2.weights}")
 print(f"Neurone 3 : {n3.weights}")
-print("✅ Les poids sont différents" if n2.weights != n3.weights else "❌ Problème")
+print(" Les poids sont différents" if n2.weights != n3.weights else "❌ Problème")
 
 # Test 3 : Poids manuels toujours possibles
 print("\n[Test 3] Poids manuels")
@@ -136,7 +121,7 @@ Biais généré : -0.234
 [Test 2] Diversité des poids
 Neurone 2 : [-0.678, 0.912, -0.145]
 Neurone 3 : [0.456, -0.789, 0.234]
-✅ Les poids sont différents
+ Les poids sont différents
 
 [Test 3] Poids manuels
 Poids manuels : [1, 1]
@@ -145,7 +130,7 @@ Poids manuels : [1, 1]
 
 ***
 
-## 🔄 Reproductibilité avec `random.seed()`
+##  Reproductibilité avec `random.seed()`
 
 ### Problème : Résultats non reproductibles
 
@@ -195,11 +180,11 @@ class Layer:
             self.neurons.append(neuron)
 ```
 
-**⚠️ Important** : En production, **ne pas mettre de seed** (les poids doivent être différents à chaque entraînement). Le seed est utile **uniquement pour déboguer**.[^1]
+** Important** : En production, **ne pas mettre de seed** (les poids doivent être différents à chaque entraînement). Le seed est utile **uniquement pour déboguer**.[^1]
 
 ***
 
-## 📊 Pourquoi `uniform(-1, 1)` ?
+##  Pourquoi `uniform(-1, 1)` ?
 
 ### Comparaison des plages d'initialisation
 
@@ -213,7 +198,7 @@ class Layer:
 
 ***
 
-## 🧠 Stratégies avancées (BONUS - hors scope du projet)
+##  Stratégies avancées (BONUS - hors scope du projet)
 
 ### Initialisation Xavier (Glorot)
 
@@ -245,20 +230,20 @@ def he_init(num_inputs):
 
 ***
 
-## ✅ Checklist de l'étape 2.3
+##  Checklist de l'étape 2.3
 
 Avant de passer à l'étape 2.4, vérifie que :
 
-- [ ] `Neuron` accepte `weights=None` et `num_inputs`
-- [ ] Les poids sont générés automatiquement avec `random.uniform(-1, 1)`
-- [ ] Le biais est également généré aléatoirement
-- [ ] Une erreur claire est levée si `weights=None` et `num_inputs=None`
-- [ ] Tu comprends le rôle de `random.seed()` (reproductibilité)
-- [ ] Tu peux créer des neurones avec poids aléatoires **ET** manuels
+- [x] `Neuron` accepte `weights=None` et `num_inputs`
+- [x] Les poids sont générés automatiquement avec `random.uniform(-1, 1)`
+- [x] Le biais est également généré aléatoirement
+- [x] Une erreur claire est levée si `weights=None` et `num_inputs=None`
+- [x] Tu comprends le rôle de `random.seed()` (reproductibilité)
+- [x] Tu peux créer des neurones avec poids aléatoires **ET** manuels
 
 ***
 
-## 🔗 Mise à jour de `layer.py`
+##  Mise à jour de `layer.py`
 
 Maintenant que `Neuron` supporte l'initialisation automatique, `Layer` devient ultra-simple :
 
@@ -294,17 +279,4 @@ print(result)  # [0.456, 0.0, 1.234] ← 3 valeurs différentes
 ```
 
 
-***
-
-## 🚀 Prochaine étape : 2.4 Tests unitaires
-
-Maintenant que tes poids sont aléatoires, tu vas devoir **valider que ton code fonctionne** avec des tests rigoureux (c'est le contenu du fichier que tu m'as envoyé).[^2]
-
-**Es-tu prêt à attaquer l'étape 2.4 ?** 💪🔥
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
-
-[^2]: Etape-2.4-Tests-unitaires-basiques.md
 

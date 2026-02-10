@@ -1,20 +1,9 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
-# Sprint Toyceptron - JOUR 4 démarré
-
-Étape 4.1 : Cas d'usage classiques
-Go ! 🚀
-
-Excellent ! 🚀 On attaque l'**Étape 4.1 : Cas d'usage classiques** — tu arrives sur la ligne droite finale du projet Toyceptron !
-
 ## Objectif de l'étape
 
 Démontrer que ton réseau fonctionne vraiment en implémentant **2 exemples classiques** :
 
 1. **Perceptron AND** (porte logique) avec poids fixés
 2. **Démonstration XOR impossible** avec un seul neurone
-
-[^1]
 
 ***
 
@@ -23,7 +12,6 @@ Démontrer que ton réseau fonctionne vraiment en implémentant **2 exemples cla
 ### Concept mathématique
 
 La porte AND retourne 1 seulement si **toutes les entrées valent 1** :
-
 
 | x₁ | x₂ | Sortie |
 | :-- | :-- | :-- |
@@ -98,7 +86,6 @@ print("=" * 40)
 
 La porte XOR :
 
-
 | x₁ | x₂ | Sortie |
 | :-- | :-- | :-- |
 | 0 | 0 | 0 |
@@ -106,7 +93,7 @@ La porte XOR :
 | 1 | 0 | 1 |
 | 1 | 1 | 0 |
 
-**Problème** : Ces points ne sont **pas linéairement séparables**. Aucune ligne droite ne peut séparer les 0 des 1.[^1]
+**Problème** : Ces points ne sont **pas linéairement séparables**. Aucune ligne droite ne peut séparer les 0 des 1.
 
 Sur le playground TensorFlow, si tu essaies avec **0 hidden layer**, le réseau échoue toujours sur XOR. Il faut **au moins 1 couche cachée** pour créer une frontière de décision non-linéaire.
 
@@ -164,7 +151,7 @@ print("=" * 50)
 ```
 
 **Sortie attendue** :
-Toutes les configurations auront **au moins 1 erreur**.[^1]
+Toutes les configurations auront **au moins 1 erreur**.
 
 ***
 
@@ -200,24 +187,9 @@ print("Mais l'ARCHITECTURE permet mathématiquement de résoudre XOR !")
 
 ## Checklist de validation
 
-- [ ] `test_and.py` affiche 4/4 réussites ✓
-- [ ] `test_xor_impossible.py` montre que XOR échoue avec 1 neurone
-- [ ] Tu comprends **pourquoi** XOR nécessite une couche cachée
-- [ ] Tu peux expliquer le lien avec le playground TensorFlow
+- [x] `test_and.py` affiche 4/4 réussites ✓
+- [x] `test_xor_impossible.py` montre que XOR échoue avec 1 neurone
+- [x] Tu comprends **pourquoi** XOR nécessite une couche cachée
+- [x] Tu peux expliquer le lien avec le playground TensorFlow
 
-***
-
-## Prochaine étape
-
-Une fois validé :
-
-- **Étape 4.2** : Méthode `summary()` (optionnel, 30 min)
-- **Étape 4.3** : Rédaction du README
-- **Étape 4.4** : Relecture finale et tests
-
-Tu es **quasi au bout** ! 🎯 Lance les tests et dis-moi ce que ça donne. 💪
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
 

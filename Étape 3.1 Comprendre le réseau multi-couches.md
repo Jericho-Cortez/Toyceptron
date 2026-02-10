@@ -1,15 +1,4 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
-# Sprint Toyceptron - JOUR 3 démarré
-
-Étape 3.1 : Comprendre le réseau multi-couches
-Go ! 🚀
-
-Parfait ! 🚀 **Tu attaques le cœur du projet** : le réseau de neurones multi-couches. C'est là que tout se connecte.
-
-***
-
-## 🧠 Étape 3.1 : Comprendre le réseau multi-couches (30 min)
+## Étape 3.1 : Comprendre le réseau multi-couches
 
 ### Le concept fondamental
 
@@ -36,7 +25,7 @@ Input Layer     →     Hidden Layer    →    Output Layer
 
 ***
 
-## 🎯 Visualisation sur TensorFlow Playground
+##  Visualisation sur TensorFlow Playground
 
 **Action immédiate** : Va sur https://playground.tensorflow.org[^1]
 
@@ -56,13 +45,13 @@ Input Layer     →     Hidden Layer    →    Output Layer
 
 ***
 
-## 🔗 Lien avec ton code Python
+##  Lien avec ton code Python
 
 ### Ce que tu as déjà codé
 
-✅ **Neuron** : calcule `f(w·x + b)` → **UN cercle** sur le playground
-✅ **Layer** : groupe de neurones → **UNE colonne** de cercles
-❌ **Network** : enchaînement de layers → **TOUT le playground**
+**Neuron** : calcule `f(w·x + b)` → **UN cercle** sur le playground
+**Layer** : groupe de neurones → **UNE colonne** de cercles
+**Network** : enchaînement de layers → **TOUT le playground**
 
 ### Architecture attendue pour `network.py`
 
@@ -89,7 +78,7 @@ class Network:
 
 ***
 
-## 🔢 Exemple numérique concret
+##  Exemple numérique concret
 
 **Configuration** :
 
@@ -110,7 +99,7 @@ class Network:
 
 ***
 
-## 📐 Mathématiques derrière le multi-couches
+##  Mathématiques derrière le multi-couches
 
 Pour chaque layer $l$ :
 
@@ -136,7 +125,7 @@ return current
 
 ***
 
-## ✅ Validation de compréhension
+## Validation de compréhension
 
 **Tu dois pouvoir répondre** :
 
@@ -144,19 +133,4 @@ return current
 2. Si Layer1 a 4 neurones, combien de valeurs en sortie ? → **4 valeurs**
 3. Si Layer1 sort `[a, b, c]`, combien d'inputs pour chaque neurone de Layer2 ? → **3 inputs**
 
-***
-
-## 🚀 Prochaine étape
-
-Tu es maintenant prêt pour **l'étape 3.2 : Coder network.py** !
-
-Tu veux que je te guide pour :
-
-- Construire le `__init__()` avec la boucle de création des layers ?
-- Implémenter le `forward()` qui enchaîne les couches ?
-- Les deux d'un coup ? 💪
-
-<div align="center">⁂</div>
-
-[^1]: ROADMAP-TOYCEPTRON-Mode-Sprint-3-4-jours.md
 
