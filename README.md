@@ -9,11 +9,11 @@ Objectif : comprendre comment fonctionne un perceptron en le codant à la main.
 
 ## Structure
 
-neuron.py → Classe Neuron
-layer.py → Classe Layer
-network.py → Classe Network
-activations.py → Fonctions d'activation
-main.py → Démonstration
+- neuron.py → Classe Neuron
+- layer.py → Classe Layer
+- network.py → Classe Network
+- activations.py → Fonctions d'activation
+- main.py → Démonstration
 
 ---
 
