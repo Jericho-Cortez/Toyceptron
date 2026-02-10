@@ -2,18 +2,26 @@
 Classe Neuron - Unité de base du réseau
 Toyceptron - Projet pédagogique Python pur
 """
-
+import random
 from activations import identity
 
+
 class Neuron:
-    def __init__(self, weights, bias=0, activation=identity):
+    def __init__(self, weights=None, num_inputs=None, bias=0, activation=identity):
         """
-        Initialise un neurone
-        - weights : liste des poids [w1, w2, ..., wn]
-        - bias : biais (scalaire)
-        - activation : fonction d'activation
+        weights: liste de poids OU None pour génération auto
+        num_inputs: nombre d'entrées (obligatoire si weights=None)
+        bias: biais du neurone
+        activation: fonction d'activation
         """
-        self.weights = weights
+        if weights is None:
+            # Génération automatique de poids aléatoires entre -1 et 1
+            if num_inputs is None:
+                raise ValueError("Si weights=None, num_inputs doit être fourni")
+            self.weights = [random.uniform(-1, 1) for _ in range(num_inputs)]
+        else:
+            self.weights = weights
+        
         self.bias = bias
         self.activation = activation
     
@@ -40,9 +48,8 @@ class Neuron:
         
         return output
 
-
-# Tests unitaires
 if __name__ == "__main__":
+    random.seed(42)  # Pour reproductibilité des tests
     from activations import relu, sigmoid, heaviside
     
     print("=" * 50)
