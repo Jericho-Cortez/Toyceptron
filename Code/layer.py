@@ -1,51 +1,61 @@
 from neuron import Neuron
-from activations import identity
+
 
 class Layer:
-    """
-    Une couche = plusieurs neurones qui reçoivent les mêmes inputs.
-    """
-    def __init__(self, num_neurons=None, num_inputs=None, weights_list=None, biases_list=None, activation=identity):
+    def __init__(self, num_neurons=None, num_inputs=None, activation=None, 
+                 weights_list=None, biases_list=None):
         """
-        Deux modes d'initialisation :
+        Crée une couche de neurones.
         
-        MODE 1 (automatique) :
-            num_neurons (int) : Nombre de neurones
-            num_inputs (int) : Nombre d'entrées par neurone
-            activation (function) : Fonction d'activation
-            → Les poids/biais sont générés aléatoirement
+        Mode 1 - Poids aléatoires :
+            Layer(num_neurons=3, num_inputs=2, activation=relu)
         
-        MODE 2 (manuel) :
-            weights_list : [[w11, w12, ...], [w21, w22, ...], ...]
-            biases_list : [b1, b2, ...]
-            activation (function) : Fonction d'activation
-            → Les poids/biais sont fournis explicitement
+        Mode 2 - Poids fournis (main.py prof) :
+            Layer(
+                weights_list=[[0.5, -0.3], [0.2, 0.1]],
+                biases_list=[0.0, 0.1],
+                activation=sigmoid  # Optionnel si pas d'activation
+            )
         """
         self.neurons = []
         
-        # MODE 1 : Initialisation automatique
-        if weights_list is None and num_neurons is not None and num_inputs is not None:
+        # MODE 1 : Créer avec poids aléatoires
+        if num_neurons is not None and num_inputs is not None:
+            if activation is None:
+                from activations import identity
+                activation = identity
+            
             for _ in range(num_neurons):
                 neuron = Neuron(num_inputs=num_inputs, activation=activation)
                 self.neurons.append(neuron)
         
-        # MODE 2 : Initialisation manuelle
+        # MODE 2 : Créer avec poids fournis
         elif weights_list is not None and biases_list is not None:
-            for weights, bias in zip(weights_list, biases_list):
-                neuron = Neuron(weights=weights, bias=bias, activation=activation)
+            num_neurons = len(weights_list)
+            
+            if len(biases_list) != num_neurons:
+                raise ValueError(f"Il faut autant de biais ({len(biases_list)}) que de poids ({num_neurons})")
+            
+            for i in range(num_neurons):
+                neuron = Neuron(weights=weights_list[i], bias=biases_list[i], activation=activation)
                 self.neurons.append(neuron)
         
         else:
-            raise ValueError("Fournir soit (num_neurons, num_inputs) soit (weights_list, biases_list)")
+            raise ValueError(
+                "Vous devez fournir soit :\n"
+                "  - num_neurons + num_inputs (poids aléatoires)\n"
+                "  - weights_list + biases_list (poids fournis)"
+            )
     
     def forward(self, inputs):
         """
-        Propage les inputs dans tous les neurones.
+        Propagation avant à travers tous les neurones de la couche.
         
-        Args:
-            inputs : liste [x1, x2, ...]
-        Returns:
-            liste des sorties [z1, z2, ...]
+        Paramètres :
+            inputs (list) : Vecteur d'entrée
+        
+        Retourne :
+            list : Liste des sorties (une par neurone)
         """
         outputs = []
         for neuron in self.neurons:
@@ -54,21 +64,36 @@ class Layer:
         return outputs
 
 
-# Test
+# ============================================================
+# TESTS
+# ============================================================
 if __name__ == "__main__":
-    # Test MODE 2 (manuel)
-    layer_manual = Layer(
+    from activations import relu, sigmoid
+    
+    print("\n" + "="*60)
+    print("TEST 1 : Layer avec poids aléatoires")
+    print("="*60)
+    
+    layer1 = Layer(num_neurons=3, num_inputs=2, activation=relu)
+    result1 = layer1.forward([1.0, 2.0])
+    print(f"Entrée: [1.0, 2.0]")
+    print(f"Sortie: {result1}")
+    
+    print("\n" + "="*60)
+    print("TEST 2 : Layer avec poids fournis (main.py)")
+    print("="*60)
+    
+    layer2 = Layer(
         weights_list=[
             [0.2, -0.1, 0.4],
-            [-0.4, 0.3, 0.1],
+            [-0.4, 0.3, 0.1]
         ],
-        biases_list=[0.0, 0.1],
-        activation=identity
+        biases_list=[0.0, 0.1]
     )
-    result = layer_manual.forward([1.0, 2.0, 4.0])
-    print(f"✅ Sorties couche (manuel) : {result}")
+    result2 = layer2.forward([2, 3, 1])
+    print(f"Entrée: [2, 3, 1]")
+    print(f"Sortie: {result2}")
     
-    # Test MODE 1 (automatique)
-    layer_auto = Layer(num_neurons=3, num_inputs=2, activation=identity)
-    result_auto = layer_auto.forward([1.0, 2.0])
-    print(f"✅ Sorties couche (auto) : {result_auto}")
+    print("\n" + "="*60)
+    print("✅ TOUS LES TESTS SONT PASSÉS !")
+    print("="*60)

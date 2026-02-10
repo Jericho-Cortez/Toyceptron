@@ -89,3 +89,9 @@ for i, layer in enumerate(net.layers):
     print(f"\nCouche {i + 1} (valeurs brutes):", raw)
     print(f"Couche {i + 1} (valeurs activées):", activated)
     inputs = activated
+
+net = Network(
+    layer_sizes=[2, 4, 3, 1],  # Input: 2, Hidden1: 4, Hidden2: 3, Output: 1
+    activations=[relu, relu, sigmoid]
+)
+net.summary()

@@ -1,78 +1,99 @@
-# neuron.py (VERSION CORRIGÉE)
 import random
-from activations import identity
+
 
 class Neuron:
-    """
-    Un neurone effectue un produit scalaire + biais + activation.
-    z = w·x + b
-    output = f(z)
-    """
-    def __init__(self, weights=None, num_inputs=None, bias=0.0, activation=identity):
+    def __init__(self, weights=None, bias=0.0, num_inputs=None, activation=None):
         """
-        Deux modes d'initialisation :
+        Crée un neurone.
         
-        MODE 1 (automatique) :
-            num_inputs (int) : Nombre d'entrées
-            → Les poids sont générés aléatoirement
-        
-        MODE 2 (manuel) :
-            weights (list) : Liste des poids [w1, w2, ..., wn]
-            → Les poids sont fournis explicitement
-        
-        Args:
-            weights (list, optional) : Poids manuels
-            num_inputs (int, optional) : Nombre d'entrées pour génération auto
+        Paramètres :
+            weights (list) : Liste des poids (si fournis)
             bias (float) : Biais du neurone
+            num_inputs (int) : Nombre d'entrées (si poids aléatoires)
             activation (function) : Fonction d'activation
         """
         # Gestion des poids
-        if weights is None:
-            if num_inputs is None:
-                raise ValueError("Fournir soit 'weights' soit 'num_inputs'")
-            # Initialisation aléatoire entre -1 et 1
+        if weights is not None:
+            self.weights = weights
+        elif num_inputs is not None:
+            # Génération aléatoire
             self.weights = [random.uniform(-1, 1) for _ in range(num_inputs)]
         else:
-            self.weights = weights
+            raise ValueError("Vous devez fournir soit 'weights' soit 'num_inputs'")
         
         self.bias = bias
-        self.activation = activation
+        
+        # ✅ CORRECTION : Activation par défaut = identity
+        if activation is None:
+            from activations import identity
+            self.activation = identity
+        else:
+            self.activation = activation
     
     def forward(self, inputs):
         """
         Calcule la sortie du neurone.
         
-        Étapes :
-        1. Produit scalaire : z = Σ(wi * xi)
-        2. Ajout du biais : z = z + b
-        3. Activation : output = f(z)
+        Paramètres :
+            inputs (list) : Vecteur d'entrée
         
-        Args:
-            inputs (list) : Vecteur d'entrée [x1, x2, ..., xn]
-        Returns:
+        Retourne :
             float : Sortie activée du neurone
         """
-        # Produit scalaire manuel
-        z = 0.0
-        for w, x in zip(self.weights, inputs):
-            z += w * x
+        # Vérification des dimensions
+        if len(inputs) != len(self.weights):
+            raise ValueError(
+                f"Le nombre d'inputs ({len(inputs)}) ne correspond pas "
+                f"au nombre de poids ({len(self.weights)})"
+            )
         
-        # Ajout du biais
+        # 1. Produit scalaire (dot product)
+        z = 0
+        for i in range(len(inputs)):
+            z += inputs[i] * self.weights[i]
+        
+        # 2. Ajouter le biais
         z += self.bias
         
-        # Application de l'activation
+        # 3. Appliquer l'activation
         return self.activation(z)
 
 
-# Test
+# ============================================================
+# TESTS
+# ============================================================
 if __name__ == "__main__":
-    # Test MODE 2 (manuel)
-    n_manual = Neuron(weights=[0.2, -0.1, 0.4], bias=0.0, activation=identity)
-    result = n_manual.forward([1.0, 2.0, 4.0])
-    print(f"✅ Résultat neurone (manuel) : {result}")  # 1.6
+    from activations import sigmoid, relu, identity
     
-    # Test MODE 1 (automatique)
-    n_auto = Neuron(num_inputs=3, bias=0.5, activation=identity)
-    result_auto = n_auto.forward([1.0, 2.0, 4.0])
-    print(f"✅ Résultat neurone (auto) : {result_auto}")
-    print(f"   Poids générés : {n_auto.weights}")
+    print("\n" + "="*60)
+    print("TEST 1 : Neurone avec poids fournis + activation")
+    print("="*60)
+    
+    n1 = Neuron(weights=[0.5, -0.3], bias=0.1, activation=sigmoid)
+    result1 = n1.forward([1.0, 2.0])
+    print(f"Entrée: [1.0, 2.0]")
+    print(f"Sortie: {result1}")
+    
+    print("\n" + "="*60)
+    print("TEST 2 : Neurone avec poids fournis SANS activation (identity par défaut)")
+    print("="*60)
+    
+    n2 = Neuron(weights=[0.5, -0.3], bias=0.1)  # activation=None
+    result2 = n2.forward([1.0, 2.0])
+    print(f"Entrée: [1.0, 2.0]")
+    print(f"Sortie: {result2}")
+    print(f"Activation utilisée: {n2.activation.__name__}")
+    
+    print("\n" + "="*60)
+    print("TEST 3 : Neurone avec poids aléatoires")
+    print("="*60)
+    
+    n3 = Neuron(num_inputs=3, activation=relu)
+    result3 = n3.forward([1.0, 2.0, 3.0])
+    print(f"Poids générés: {n3.weights}")
+    print(f"Entrée: [1.0, 2.0, 3.0]")
+    print(f"Sortie: {result3}")
+    
+    print("\n" + "="*60)
+    print("✅ TOUS LES TESTS SONT PASSÉS !")
+    print("="*60)
