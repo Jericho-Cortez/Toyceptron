@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # Sprint Toyceptron - JOUR 1 démarré
 
 Étape 1.1 : test POO avec classe Point
