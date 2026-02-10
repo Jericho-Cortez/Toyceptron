@@ -1,6 +1,5 @@
 from layer import Layer
 
-
 class Network:
     def __init__(self, layer_sizes=None, activations=None, 
                  input_size=None, hidden_layers=None, output_size=None, activation=None):
@@ -137,7 +136,7 @@ class Network:
         print("=" * 60)
         
         if len(self.layers) == 0:
-            print("⚠️  Réseau vide - Aucune couche ajoutée")
+            print("  Réseau vide - Aucune couche ajoutée")
         else:
             for i, layer in enumerate(self.layers):
                 num_neurons = len(layer.neurons)
@@ -155,56 +154,3 @@ class Network:
                     print(f"Layer {i+1}: Vide")
         
         print("=" * 60)
-
-
-# ============================================================
-# TESTS
-# ============================================================
-if __name__ == "__main__":
-    from activations import sigmoid, relu
-    from math import exp
-    
-    def act_sigmoid(x):
-        return 1 / (1 + exp(-x))
-    
-    print("\n" + "="*60)
-    print("TEST : Main.py prof (construction progressive)")
-    print("="*60)
-    
-    x = [1.0, 2.0, 4.0]
-    
-    # Réseau VIDE au départ
-    net = Network(input_size=3, activation=act_sigmoid)
-    print(f"Nombre de couches après __init__: {len(net.layers)}")  # Doit être 0
-    
-    # Ajouter les couches
-    net.add(
-        weights=[
-            [0.2, -0.1, 0.4],
-            [-0.4, 0.3, 0.1],
-        ],
-        biases=[0.0, 0.1],
-    )
-    net.add(
-        weights=[
-            [0.5, -0.2],
-            [-0.3, 0.4],
-            [0.1, 0.2],
-        ],
-        biases=[0.0, 0.1, -0.1],
-    )
-    net.add(
-        weights=[
-            [0.3, -0.1, 0.2],
-            [-0.5, 0.4, 0.1],
-        ],
-        biases=[-0.1, 0.0],
-    )
-    
-    net.summary()
-    y = net.feedforward(x)
-    print(f"\nSorties activées: {y}")
-    
-    print("\n" + "="*60)
-    print("✅ TEST PASSÉ !")
-    print("="*60)

@@ -3,14 +3,15 @@ from math import exp
 from network import Network
 from layer import Layer
 from neuron import Neuron
-from activations import identity, relu, heaviside, sigmoid
+from activation import relu, identity
+
 
 def act_sigmoid(x):
     return 1 / (1 + exp(-x))
 
 
 # --- Input ---
-x = [2, 3, 1]
+x = [1.0, 2.0, 4.0]
 print("Input:", x)
 
 # --- Test neurone individuel ---
@@ -89,9 +90,3 @@ for i, layer in enumerate(net.layers):
     print(f"\nCouche {i + 1} (valeurs brutes):", raw)
     print(f"Couche {i + 1} (valeurs activées):", activated)
     inputs = activated
-
-net = Network(
-    layer_sizes=[2, 4, 3, 1],  # Input: 2, Hidden1: 4, Hidden2: 3, Output: 1
-    activations=[relu, relu, sigmoid]
-)
-net.summary()
