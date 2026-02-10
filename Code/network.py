@@ -1,51 +1,68 @@
 from layer import Layer
 
+
 class Network:
-    def __init__(self, layer_sizes, activations):
+    """
+    Un réseau = plusieurs couches enchaînées.
+    L'activation est appliquée APRÈS chaque couche.
+    """
+    def __init__(self, input_size, activation):
         """
-        Construit un réseau de neurones multi-couches.
-        
-        Args:
-            layer_sizes: liste [nb_inputs, nb_hidden1, ..., nb_outputs]
-            activations: liste de fonctions d'activation (une par couche)
+        input_size : nombre d'entrées du réseau (ex: 3)
+        activation : fonction d'activation (ex: act_sigmoid)
         """
+        self.input_size = input_size
+        self.activation = activation
         self.layers = []
-        
-        # Créer chaque couche
-        for i in range(len(layer_sizes) - 1):
-            num_inputs = layer_sizes[i]
-            num_neurons = layer_sizes[i + 1]
-            activation = activations[i]
-            
-            layer = Layer(num_neurons, num_inputs, activation)
-            self.layers.append(layer)
     
-    def forward(self, inputs):
+    def add(self, weights, biases):
         """
-        Propagation avant : fait passer les inputs à travers toutes les couches.
-        
-        Args:
-            inputs: liste de valeurs d'entrée
-        
-        Returns:
-            Liste des sorties du réseau
+        Ajoute une couche au réseau.
+        weights : liste de listes [[w11, ...], [w21, ...], ...]
+        biases : liste [b1, b2, ...]
+        """
+        layer = Layer(weights_list=weights, biases_list=biases)
+        self.layers.append(layer)
+    
+    def feedforward(self, inputs):
+        """
+        Propage les inputs à travers toutes les couches.
+        Applique l'activation après chaque couche.
+        inputs : liste [x1, x2, ...]
+        Retourne : liste des sorties finales activées
         """
         current = inputs
+        
         for layer in self.layers:
-            current = layer.forward(current)
+            # 1. Propagation brute
+            raw_outputs = layer.forward(current)
+            
+            # 2. Application de l'activation
+            activated_outputs = [self.activation(z) for z in raw_outputs]
+            
+            # 3. Les sorties activées deviennent les entrées de la couche suivante
+            current = activated_outputs
+        
         return current
 
 
-# Test rapide
+# Test
 if __name__ == "__main__":
-    from activations import relu, sigmoid
+    from math import exp
     
-    # Réseau 2 → 3 → 1
-    net = Network(layer_sizes=[2, 3, 1], activations=[relu, sigmoid])
-    result = net.forward([1.0, 2.0])
-    print(f"Sortie du réseau : {result}")
+    def act_sigmoid(x):
+        return 1 / (1 + exp(-x))
     
-    # Réseau plus complexe 4 → 5 → 3 → 1
-    net2 = Network(layer_sizes=[4, 5, 3, 1], activations=[relu, relu, sigmoid])
-    result2 = net2.forward([1.0, 2.0, 3.0, 4.0])
-    print(f"Sortie réseau complexe : {result2}")
+    net = Network(input_size=3, activation=act_sigmoid)
+    
+    net.add(
+        weights=[
+            [0.2, -0.1, 0.4],
+            [-0.4, 0.3, 0.1],
+        ],
+        biases=[0.0, 0.1]
+    )
+    
+    result = net.feedforward([1.0, 2.0, 4.0])
+    print(f"Sortie réseau : {result}")
+    # Doit afficher environ [0.832..., 0.668...]

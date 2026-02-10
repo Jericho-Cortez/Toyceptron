@@ -1,39 +1,46 @@
-# layer.py - VERSION CORRIGÉE
-import random
 from neuron import Neuron
 
 
 class Layer:
-    def __init__(self, num_neurons, num_inputs, activation):
+    """
+    Une couche = plusieurs neurones qui reçoivent les mêmes inputs.
+    Retourne les sorties brutes (pas activées).
+    """
+    def __init__(self, weights_list, biases_list):
         """
-        Initialise une couche avec plusieurs neurones.
-        
-        Args:
-            num_neurons (int): Nombre de neurones dans la couche
-            num_inputs (int): Nombre d'entrées pour chaque neurone
-            activation (function): Fonction d'activation commune
+        weights_list : liste de listes [[w11, w12, ...], [w21, w22, ...], ...]
+                       Chaque sous-liste = poids d'un neurone
+        biases_list : liste des biais [b1, b2, ...]
         """
         self.neurons = []
         
-        for _ in range(num_neurons):
-            # Générer les poids aléatoires pour chaque neurone
-            weights = [random.uniform(-1, 1) for _ in range(num_inputs)]
-            
-            # Créer le neurone avec poids pré-générés
-            neuron = Neuron(
-                weights=weights,
-                bias=random.uniform(-1, 1),
-                activation=activation
-            )
+        # Créer un neurone pour chaque ligne de poids
+        for weights, bias in zip(weights_list, biases_list):
+            neuron = Neuron(weights=weights, bias=bias)
             self.neurons.append(neuron)
     
     def forward(self, inputs):
         """
-        Propagation avant de toute la couche.
-        Chaque neurone reçoit les MÊMES inputs.
+        Propage les inputs dans tous les neurones.
+        inputs : liste [x1, x2, ...]
+        Retourne : liste des sorties brutes [z1, z2, ...]
         """
         outputs = []
         for neuron in self.neurons:
             output = neuron.forward(inputs)
             outputs.append(output)
+        
         return outputs
+
+
+# Test
+if __name__ == "__main__":
+    layer = Layer(
+        weights_list=[
+            [0.2, -0.1, 0.4],
+            [-0.4, 0.3, 0.1],
+        ],
+        biases_list=[0.0, 0.1]
+    )
+    result = layer.forward([1.0, 2.0, 4.0])
+    print(f"Sorties couche : {result}")  # Doit afficher [1.6, 0.7]
