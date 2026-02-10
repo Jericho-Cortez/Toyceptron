@@ -3,15 +3,14 @@ from math import exp
 from network import Network
 from layer import Layer
 from neuron import Neuron
-from activations import act_relu, act_threshold, act_identity
-
+from activations import identity, relu, heaviside, sigmoid
 
 def act_sigmoid(x):
     return 1 / (1 + exp(-x))
 
 
 # --- Input ---
-x = [1.0, 2.0, 4.0]
+x = [2, 3, 1]
 print("Input:", x)
 
 # --- Test neurone individuel ---

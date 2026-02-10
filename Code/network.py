@@ -1,68 +1,77 @@
 from layer import Layer
 
-
 class Network:
     """
     Un réseau = plusieurs couches enchaînées.
-    L'activation est appliquée APRÈS chaque couche.
+    Les sorties d'une couche = inputs de la suivante.
     """
-    def __init__(self, input_size, activation):
+    def __init__(self, layer_sizes, activations):
         """
-        input_size : nombre d'entrées du réseau (ex: 3)
-        activation : fonction d'activation (ex: act_sigmoid)
+        Construit le réseau à partir des hyperparamètres.
+        
+        Args:
+            layer_sizes (list) : [nb_inputs, nb_hidden1, nb_hidden2, ..., nb_outputs]
+                                 Ex: [2, 3, 1] → 2 inputs, 1 couche cachée de 3 neurones, 1 output
+            activations (list) : Liste des fonctions d'activation par couche
+                                 Ex: [relu, sigmoid] → relu pour couche cachée, sigmoid pour output
+        
+        Exemple :
+            net = Network([2, 3, 1], [relu, sigmoid])
+            → Input : 2 valeurs
+            → Hidden layer : 3 neurones avec ReLU
+            → Output layer : 1 neurone avec sigmoid
         """
-        self.input_size = input_size
-        self.activation = activation
         self.layers = []
+        
+        # Créer les couches successives
+        for i in range(len(layer_sizes) - 1):
+            num_inputs = layer_sizes[i]      # Taille de la couche précédente
+            num_neurons = layer_sizes[i + 1] # Taille de la couche actuelle
+            activation = activations[i]       # Fonction d'activation de cette couche
+            
+            layer = Layer(
+                num_neurons=num_neurons,
+                num_inputs=num_inputs,
+                activation=activation
+            )
+            self.layers.append(layer)
     
-    def add(self, weights, biases):
-        """
-        Ajoute une couche au réseau.
-        weights : liste de listes [[w11, ...], [w21, ...], ...]
-        biases : liste [b1, b2, ...]
-        """
-        layer = Layer(weights_list=weights, biases_list=biases)
-        self.layers.append(layer)
-    
-    def feedforward(self, inputs):
+    def forward(self, inputs):
         """
         Propage les inputs à travers toutes les couches.
-        Applique l'activation après chaque couche.
-        inputs : liste [x1, x2, ...]
-        Retourne : liste des sorties finales activées
+        
+        Args:
+            inputs (list) : Vecteur d'entrée initial
+        
+        Returns:
+            list : Sortie finale du réseau (dernière couche)
+        
+        Exemple :
+            net = Network([2, 3, 1], [relu, sigmoid])
+            output = net.forward([1.0, 2.0])
+            → output = [0.73] (1 valeur car 1 neurone en sortie)
         """
         current = inputs
         
+        # Propager à travers chaque couche
         for layer in self.layers:
-            # 1. Propagation brute
-            raw_outputs = layer.forward(current)
-            
-            # 2. Application de l'activation
-            activated_outputs = [self.activation(z) for z in raw_outputs]
-            
-            # 3. Les sorties activées deviennent les entrées de la couche suivante
-            current = activated_outputs
+            current = layer.forward(current)
         
         return current
 
 
 # Test
 if __name__ == "__main__":
-    from math import exp
+    from activations import identity, relu, sigmoid
     
-    def act_sigmoid(x):
-        return 1 / (1 + exp(-x))
+    # Test 1 : Réseau simple avec activations identité (pour debug)
+    net_simple = Network([2, 3, 1], [identity, identity])
+    result = net_simple.forward([1.0, 1.0])
+    print(f"✅ Test réseau simple : {result}")
+    print(f"   (Attendu : 1 valeur)")
     
-    net = Network(input_size=3, activation=act_sigmoid)
-    
-    net.add(
-        weights=[
-            [0.2, -0.1, 0.4],
-            [-0.4, 0.3, 0.1],
-        ],
-        biases=[0.0, 0.1]
-    )
-    
-    result = net.feedforward([1.0, 2.0, 4.0])
-    print(f"Sortie réseau : {result}")
-    # Doit afficher environ [0.832..., 0.668...]
+    # Test 2 : Réseau avec activations réelles
+    net_real = Network([3, 5, 2], [relu, sigmoid])
+    result_real = net_real.forward([0.5, -0.2, 1.0])
+    print(f"✅ Test réseau réel : {result_real}")
+    print(f"   (Attendu : 2 valeurs entre 0 et 1)")

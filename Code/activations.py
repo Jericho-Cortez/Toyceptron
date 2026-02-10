@@ -1,16 +1,18 @@
-def act_identity(x):
+# activations.py
+
+def identity(x):
     """Fonction identité : f(x) = x"""
     return x
 
+def heaviside(x):
+    """Fonction seuil (Heaviside) : 0 si x < 0, sinon 1"""
+    return 1 if x >= 0 else 0
 
-def act_threshold(x):
-    """Fonction de seuil (Heaviside) : f(x) = 1 si x ≥ 0, sinon 0"""
-    return 1.0 if x >= 0 else 0.0
+def sigmoid(x):
+    """Fonction sigmoïde : f(x) = 1 / (1 + e^(-x))"""
+    import math
+    return 1 / (1 + math.exp(-x))
 
-
-def act_relu(x):
+def relu(x):
     """Fonction ReLU : f(x) = max(0, x)"""
-    return max(0.0, x)
-
-
-# act_sigmoid est déjà défini dans le main.py, pas besoin de le remettre ici
+    return max(0, x)
