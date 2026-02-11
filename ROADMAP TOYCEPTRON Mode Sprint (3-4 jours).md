@@ -1,4 +1,4 @@
-## 📌 Philosophie de la roadmap
+## Philosophie de la roadmap
 
 - **Code d'abord, comprend en faisant**
     
@@ -11,9 +11,9 @@
 
 ---
 
-## ⏱️ JOUR 1 : Setup + Neurone (3-4h)
+## JOUR 1 : Setup + Neurone (3-4h)
 
-## ✅ Étape 1.1 : Remise à niveau POO Express (30 min)
+## Étape 1.1 : Remise à niveau POO Express (30 min)
 
 **Objectif** : Rafraîchir les bases Python et POO nécessaires au projet[playground.tensorflow+1](https://playground.tensorflow.org/)
 
@@ -41,11 +41,11 @@ p = Point(3, 4)
 print(p.distance())  # Doit afficher 5.0
 ```
 
-**✨ Validation** : Si ton code fonctionne, tu es prêt pour la suite !
+**Validation** : Si ton code fonctionne, tu es prêt pour la suite !
 
 ---
 
-## ✅ Étape 1.2 : Comprendre le Perceptron (1h)
+## Étape 1.2 : Comprendre le Perceptron (1h)
 
 **Objectif** : Saisir la logique mathématique d'un neurone
 
@@ -80,11 +80,11 @@ print(p.distance())  # Doit afficher 5.0
     - Activation ReLU : max(0,0.0)=0.0max(0, 0.0) = 0.0max(0,0.0)=0.0
         
 
-**✨ Validation** : Tu dois pouvoir expliquer "un neurone = produit scalaire + biais + activation"
+**Validation** : Tu dois pouvoir expliquer "un neurone = produit scalaire + biais + activation"
 
 ---
 
-## ✅ Étape 1.3 : Coder `neuron.py` (1h30)
+## Étape 1.3 : Coder `neuron.py` (1h30)
 
 **Objectif** : Implémenter ta première classe `Neuron`
 
@@ -130,11 +130,11 @@ if __name__ == "__main__":
     print(f"Résultat: {result}")  # Doit afficher 0.0
 ```
 
-**✨ Validation** : Ton test affiche `0.0` ? Bravo, ton neurone calcule correctement !
+**Validation** : Ton test affiche `0.0` ? Bravo, ton neurone calcule correctement !
 
 ---
 
-## ✅ Étape 1.4 : Ajouter les activations (1h)
+## Étape 1.4 : Ajouter les activations (1h)
 
 **Objectif** : Rendre ton neurone "intelligent" avec des fonctions d'activation
 
@@ -177,13 +177,13 @@ print(n_sigmoid.forward([1, 2]))  # ~0.5
 print(n_relu.forward([1, 2]))     # 0.0
 ```
 
-**✨ Validation** : Tu peux changer l'activation et voir des résultats différents !
+**Validation** : Tu peux changer l'activation et voir des résultats différents !
 
 ---
 
-## ⏱️ JOUR 2 : Layer + Tests (3-4h)
+## JOUR 2 : Layer + Tests (3-4h)
 
-## ✅ Étape 2.1 : Comprendre une couche (30 min)
+## Étape 2.1 : Comprendre une couche (30 min)
 
 **Concept clé :** Une couche (`Layer`) = plusieurs neurones qui reçoivent les MÊMES inputs[[tensorflow](https://www.tensorflow.org/guide/core/mlp_core)]​
 
@@ -210,7 +210,7 @@ Inputs: [x1, x2, x3]
 
 ---
 
-## ✅ Étape 2.2 : Coder `layer.py` (1h30)
+## Étape 2.2 : Coder `layer.py` (1h30)
 
 **Architecture attendue :**
 
@@ -263,11 +263,11 @@ if __name__ == "__main__":
 
 ```
 
-**✨ Validation** : Tu dois voir `[valeur1, valeur2, valeur3]`
+**Validation** : Tu dois voir `[valeur1, valeur2, valeur3]`
 
 ---
 
-## ✅ Étape 2.3 : Initialisation intelligente des poids (1h)
+## Étape 2.3 : Initialisation intelligente des poids (1h)
 
 **Problème :** Tous les poids à 0.5, c'est pas terrible
 
@@ -301,11 +301,11 @@ python
 
 `n = Neuron(num_inputs=3)  # Poids auto-générés print(n.weights)  # Doit afficher 3 valeurs aléatoires`
 
-**✨ Validation** : Chaque création de neurone donne des poids différents
+**Validation** : Chaque création de neurone donne des poids différents
 
 ---
 
-## ✅ Étape 2.4 : Tests unitaires basiques (1h)
+## Étape 2.4 : Tests unitaires basiques (1h)
 
 **Objectif :** Vérifier que ton code marche avec des cas simples
 
@@ -319,20 +319,20 @@ from activations import identity, relu
 # Test 1: Neurone avec poids fixés
 n = Neuron(weights=[1, 1], bias=0, activation=identity)
 assert n.forward([2, 3]) == 5, "Erreur calcul neurone"
-print("✅ Test neurone OK")
+print("Test neurone OK")
 
 # Test 2: Couche avec 2 neurones
 # ...
 
 ```
 
-**✨ Validation** : Tous tes `print("✅ ...")` s'affichent sans erreur
+**Validation** : Tous tes `print("...")` s'affichent sans erreur
 
 ---
 
-## ⏱️ JOUR 3 : Network + Integration (4-5h)
+##  JOUR 3 : Network + Integration (4-5h)
 
-## ✅ Étape 3.1 : Comprendre le réseau multi-couches (30 min)
+##  Étape 3.1 : Comprendre le réseau multi-couches (30 min)
 
 **Concept clé :** Les sorties d'une couche = inputs de la couche suivante[[tensorflow](https://www.tensorflow.org/guide/core/mlp_core)]​
 
@@ -356,7 +356,7 @@ Input Layer    Hidden Layer    Output Layer
 
 ---
 
-## ✅ Étape 3.2 : Coder `network.py` - Version simple (2h)
+## Étape 3.2 : Coder `network.py` - Version simple (2h)
 
 **Architecture attendue :**
 
@@ -415,11 +415,11 @@ if __name__ == "__main__":
 
 ```
 
-**✨ Validation** : Tu obtiens une sortie (même si elle est bizarre pour l'instant)
+**Validation** : Tu obtiens une sortie (même si elle est bizarre pour l'instant)
 
 ---
 
-## ✅ Étape 3.3 : Vérifications et ajustements (1h)
+## Étape 3.3 : Vérifications et ajustements (1h)
 
 **Checklist finale :**
 
@@ -434,13 +434,13 @@ if __name__ == "__main__":
 -  Chaque fichier a un `if __name__ == "__main__":` avec un test
     
 
-**✨ Validation** : Ton code est propre et fonctionne
+**Validation** : Ton code est propre et fonctionne
 
 ---
 
-## ⏱️ JOUR 4 : Finitions + Documentation (2-3h)
+## JOUR 4 : Finitions + Documentation (2-3h)
 
-## ✅ Étape 4.1 : Cas d'usage classiques (1h)
+## Étape 4.1 : Cas d'usage classiques (1h)
 
 **Implémente 2 exemples :**
 
@@ -462,7 +462,7 @@ print(n.forward([1, 1]))  # 1
 
 ---
 
-## ✅ Étape 4.2 : Méthode `summary()` (optionnel, 30 min)
+## Étape 4.2 : Méthode `summary()` (optionnel, 30 min)
 
 **Afficher l'architecture du réseau :**
 
@@ -478,7 +478,7 @@ def summary(self):
 
 ---
 
-## ✅ Étape 4.3 : README.md (30 min)
+## Étape 4.3 : README.md (30 min)
 
 **Rédige un fichier README simple :**
 
@@ -511,18 +511,18 @@ python main.py
 
 ***
 
-### ✅ Étape 4.4 : Relecture et test final (1h)
+### Étape 4.4 : Relecture et test final (1h)
 **Actions :**
 1. Relis ton code du début à la fin
 2. Teste tous les cas d'usage
 3. Vérifie que le `main.py` fonctionne
 4. Prépare ta présentation (si nécessaire)
 
-**✨ Validation finale** : Ton projet est prêt à être rendu ! 🎉
+**Validation finale** : Ton projet est prêt à être rendu ! 
 
 ***
 
-## 🎯 RÉSUMÉ ULTRA-SYNTHÉTIQUE
+## RÉSUMÉ ULTRA-SYNTHÉTIQUE
 
 | Jour | Focus | Livrable |
 |------|-------|----------|
@@ -533,7 +533,7 @@ python main.py
 
 ***
 
-## 🚨 PIÈGES À ÉVITER
+## PIÈGES À ÉVITER
 
 1. **Dimensions incompatibles** : Vérifie toujours que `len(inputs) == len(weights)`
 2. **Oublier `self`** : En POO, n'oublie jamais `self.` devant les attributs
@@ -542,7 +542,7 @@ python main.py
 
 ***
 
-## 💡 ASTUCES DE DERNIÈRE MINUTE
+## ASTUCES DE DERNIÈRE MINUTE
 
 - **Bloqué sur un bug ?** → Utilise `print()` partout pour voir les valeurs
 - **Code qui plante ?** → Vérifie les dimensions avec `print(len(...))` 
@@ -551,7 +551,7 @@ python main.py
 
 ***
 
-## 📚 RESSOURCES RAPIDES
+## RESSOURCES RAPIDES
 
 - **Refresh Python POO** : https://learnxinyminutes.com/python/
 - **Visualiser** : https://playground.tensorflow.org
